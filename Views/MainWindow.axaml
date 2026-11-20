@@ -1,0 +1,954 @@
+
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:LootDrop.Views"
+        xmlns:models="using:LootDrop.Models"
+        xmlns:services="using:LootDrop.Services"
+        x:Class="LootDrop.Views.MainWindow"
+        Title="LootDrop"
+        Foreground="{DynamicResource PrimaryTextBrush}"
+        Width="1280" Height="850"
+        MinWidth="1000" MinHeight="700"
+        Background="{DynamicResource AppBackgroundBrush}"
+        Icon="/Assets/lootdrop-purple.ico">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="AppBackgroundBrush" Color="#111019"/>
+        <SolidColorBrush x:Key="SidebarBrush" Color="#171522"/>
+        <SolidColorBrush x:Key="PanelBrush" Color="#211B32"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#7139A0"/>
+        <SolidColorBrush x:Key="AccentBrightBrush" Color="#C27DFF"/>
+        <SolidColorBrush x:Key="AccentHoverBrush" Color="#8551B3"/>
+        <SolidColorBrush x:Key="TextAccentBrush" Color="#D58AFF"/>
+        <SolidColorBrush x:Key="CardBrush" Color="#292337"/>
+        <SolidColorBrush x:Key="InputBrush" Color="#181422"/>
+        <SolidColorBrush x:Key="ButtonBrush" Color="#181422"/>
+        <SolidColorBrush x:Key="BadgeBrush" Color="#181422"/>
+        <SolidColorBrush x:Key="PrimaryTextBrush" Color="#F4F0FF"/>
+        <SolidColorBrush x:Key="MutedTextBrush" Color="#B9AFCB"/>
+        <SolidColorBrush x:Key="SubtleTextBrush" Color="#B9AFCB"/>
+        <SolidColorBrush x:Key="OnAccentBrush" Color="#000000"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#514960"/>
+        <SolidColorBrush x:Key="SuccessBrush" Color="#64E6BA"/>
+        <SolidColorBrush x:Key="WarningBrush" Color="#FFB66B"/>
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="{DynamicResource ButtonBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12,9"/>
+            <Setter Property="CornerRadius" Value="7"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+
+        <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="{DynamicResource AccentHoverBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}"/>
+        </Style>
+
+        <Style Selector="Button.selected">
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}"/>
+        </Style>
+
+        <Style Selector="Button.selected:pointerover">
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}"/>
+        </Style>
+
+        <!-- Fluent templates paint their own ContentPresenter on hover.
+             Set its background too, so selected chips never flash dim. -->
+        <Style Selector="Button.selected /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+        </Style>
+        <Style Selector="Button.selected:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+        </Style>
+        <Style Selector="Button.selected:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+        </Style>
+        <Style Selector="Button.selected:pressed">
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+        </Style>
+
+        <Style Selector="TextBlock.heading">
+            <Setter Property="FontSize" Value="23"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+        </Style>
+
+        <Style Selector="TextBlock.muted">
+            <Setter Property="Foreground" Value="{DynamicResource MutedTextBrush}"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="{DynamicResource InputBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12"/>
+        </Style>
+        <Style Selector="Button.offer-icon">
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="MinHeight" Value="32"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="FontSize" Value="19"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{DynamicResource MutedTextBrush}"/>
+        </Style>
+        <Style Selector="Button.offer-icon.status-good">
+            <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
+        </Style>
+        <Style Selector="Button.offer-icon.status-warning">
+            <Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/>
+        </Style>
+        <Style Selector="Button.offer-title">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+        <Style Selector="Button.offer-title:pointerover">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextAccentBrush}"/>
+        </Style>
+        <Style Selector="Button.offer-title:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextAccentBrush}"/>
+        </Style>
+        <Style Selector="Button.offer-icon:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}"/>
+        </Style>
+        <Style Selector="Button.offer-icon:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource AccentHoverBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid x:Name="ShellGrid" ColumnDefinitions="220,*">
+
+        <!-- SIDEBAR -->
+
+        <Border x:Name="SidebarPanel" Grid.Column="0"
+                Background="{DynamicResource SidebarBrush}"
+                BorderBrush="{DynamicResource BorderBrush}"
+                BorderThickness="0,0,1,0">
+
+            <Grid RowDefinitions="Auto,*,Auto">
+
+                <StackPanel x:Name="SidebarBrand" Margin="20,18" Spacing="6">
+                    <Button x:Name="SidebarToggleButton" Content="☰  Collapse" Click="ToggleSidebar_Click"
+                            HorizontalAlignment="Left" ToolTip.Tip="Expand or collapse sidebar"/>
+                    <TextBlock x:Name="SidebarLogo" Text="LOOTDROP"
+                               FontSize="26"
+                               FontWeight="Black"
+                               Foreground="{DynamicResource TextAccentBrush}"/>
+                    <TextBlock x:Name="SidebarTagline" Text="YOUR FREE GAME RADAR"
+                               FontSize="9"
+                               Foreground="{DynamicResource MutedTextBrush}"/>
+                    <StackPanel x:Name="DeveloperBrand" Orientation="Horizontal" Spacing="7" Margin="0,5,0,0" ToolTip.Tip="Made by Degenerates Inc. · Bad Decisions. Good Games.">
+                        <Border Width="30" Height="30" Background="Black" CornerRadius="6" ClipToBounds="True"><Image Source="/Assets/Branding/degenerates-inc-duo.png" RenderOptions.BitmapInterpolationMode="HighQuality" Stretch="Uniform" AutomationProperties.Name="Degenerates Inc. duo emblem"/></Border>
+                        <StackPanel VerticalAlignment="Center" Spacing="1"><TextBlock Text="MADE BY" FontSize="8" Classes="muted"/><TextBlock Text="Degenerates Inc." FontSize="11" Foreground="{DynamicResource PrimaryTextBrush}"/></StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel x:Name="SidebarNavigation" Margin="12">
+
+                    <TextBlock x:Name="SidebarMainHeader" Text="MAIN MENU"
+                               Foreground="{DynamicResource MutedTextBrush}"
+                               FontSize="10"
+                               Margin="12,8"/>
+
+                    <Button x:Name="NavDiscover" ToolTip.Tip="Discover Games" Classes="selected"
+                            Tag="discover"
+                            Click="Navigation_Click"
+                            HorizontalContentAlignment="Left">
+                        ⌕  Discover Games
+                    </Button>
+
+                    <Button x:Name="NavWishlist" ToolTip.Tip="My Wishlist" Tag="wishlist"
+                            Click="Navigation_Click"
+                            HorizontalContentAlignment="Left">
+                        ♡  My Wishlist
+                    </Button>
+
+                    <Button x:Name="NavClaimed" ToolTip.Tip="Claimed Backlog" Tag="claimed"
+                            Click="Navigation_Click"
+                            HorizontalContentAlignment="Left">
+                        ▣  Claimed Backlog
+                    </Button>
+
+                    <TextBlock x:Name="SidebarCollectionHeader" Text="COLLECTION"
+                               Foreground="{DynamicResource MutedTextBrush}"
+                               FontSize="10"
+                               Margin="12,24,0,8"/>
+
+                    <Button x:Name="NavAll" ToolTip.Tip="All Games" Tag="all"
+                            Click="Navigation_Click"
+                            HorizontalContentAlignment="Left">
+                        ▤  All Games
+                    </Button>
+
+                    <Button x:Name="NavValuable" ToolTip.Tip="Highest Value" Tag="valuable"
+                            Click="Navigation_Click"
+                            HorizontalContentAlignment="Left">
+                        ★  Highest Value
+                    </Button>
+
+                    <Button x:Name="NavRecent" ToolTip.Tip="Recently Added" Tag="recent"
+                            Click="Navigation_Click"
+                            HorizontalContentAlignment="Left">
+                        ◉  Recently Added
+                    </Button>
+
+                    <TextBlock x:Name="SidebarPreferencesHeader" Text="PREFERENCES"
+                               Foreground="{DynamicResource MutedTextBrush}"
+                               FontSize="10"
+                               Margin="12,24,0,8"/>
+
+                    <Button x:Name="NavSettings" ToolTip.Tip="Settings" Tag="settings"
+                            Click="Navigation_Click"
+                            HorizontalContentAlignment="Left">⚙  Settings</Button>
+
+                    <Button x:Name="NavThemes" ToolTip.Tip="Themes" Tag="themes"
+                            Click="Navigation_Click"
+                            HorizontalContentAlignment="Left">◉  Themes</Button>
+
+                    <Button x:Name="NavStoreSignIn" Tag="signin" ToolTip.Tip="Store sign-in shortcuts" Click="Navigation_Click" HorizontalContentAlignment="Left">↗  Store sign-in</Button><Button x:Name="NavHelp" ToolTip.Tip="Help &amp; feature guide (F1)" Tag="help"
+                            Click="Navigation_Click" HorizontalContentAlignment="Left">?  Help</Button>
+                </StackPanel>
+                </ScrollViewer>
+
+                <Border x:Name="SidebarStatus" Grid.Row="2"
+                        Background="{DynamicResource PanelBrush}"
+                        CornerRadius="9"
+                        Padding="12"
+                        Margin="12">
+
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="SYSTEM STATUS"
+                                   Foreground="{DynamicResource MutedTextBrush}"
+                                   FontSize="10"/>
+                        <TextBlock x:Name="SourceStateText" Text="○ NOT REFRESHED"
+                                   Foreground="{DynamicResource MutedTextBrush}"
+                                   FontWeight="Bold"/>
+                        <TextBlock Text="SAVED ON THIS PC"
+                                   Classes="muted"/>
+                    </StackPanel>
+
+                </Border>
+
+            </Grid>
+        </Border>
+
+        <!-- MAIN DASHBOARD -->
+
+        <Grid x:Name="MainArea" Grid.Column="1" RowDefinitions="Auto,*">
+
+            <!-- TOP BAR -->
+
+            <Border Grid.Row="0"
+                    Background="{DynamicResource SidebarBrush}"
+                    Padding="20,14"
+                    BorderBrush="{DynamicResource BorderBrush}"
+                    BorderThickness="0,0,0,1">
+
+                <Grid ColumnDefinitions="*,Auto">
+
+                    <TextBox x:Name="SearchBox"
+                             PlaceholderText="Search titles, descriptions or genres..."
+                             MaxWidth="480"
+                             HorizontalAlignment="Left"
+                             TextChanged="Search_TextChanged"/>
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                Spacing="8"
+                                VerticalAlignment="Center">
+
+                        <TextBlock Text="LOCAL" ToolTip.Tip="Tracking stays on this PC. Hover over Feeds for provider status."
+                                   Foreground="{DynamicResource SuccessBrush}"
+                                   VerticalAlignment="Center"
+                                   FontSize="11"/>
+
+                        <Button x:Name="RefreshButton" Click="Refresh_Click">↻ Refresh / Recheck</Button>
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <!-- Wallpaper sits behind the content; content remains interactive. -->
+            <Grid Grid.Row="1" ClipToBounds="True">
+                <Image x:Name="ThemeBackgroundImage" Stretch="UniformToFill" Opacity="1"
+                       IsVisible="False" IsHitTestVisible="False"/>
+                <Border x:Name="ThemeBackgroundOverlay" Background="#B8111019"
+                        IsVisible="False" IsHitTestVisible="False"/>
+
+            <ScrollViewer x:Name="DiscoveryScroll" Grid.Row="0"
+                          VerticalScrollBarVisibility="Auto">
+
+                <StackPanel Margin="22" Spacing="12">
+
+                    <!-- WELCOME -->
+
+                    <StackPanel Spacing="5">
+
+                        <TextBlock x:Name="PageTitle"
+                                   Text="Discover Free Games"
+                                   Classes="heading"/>
+                        <TextBlock x:Name="StatusText"
+                                   Text="Connecting to GamerPower…"
+                                   Foreground="{DynamicResource SuccessBrush}"
+                                   FontSize="11"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <!-- STATISTICS -->
+
+                    <Grid ColumnDefinitions="*,*,*"
+                          ColumnSpacing="12">
+
+                        <Border ToolTip.Tip="Current live provider listings. A listing is not a verified checkout or account entitlement." Background="{DynamicResource PanelBrush}"
+                                CornerRadius="10"
+                                Padding="12">
+                            <StackPanel Spacing="2">
+                                <TextBlock Text="AVAILABLE DROPS"
+                                           Classes="muted"/>
+                                <TextBlock x:Name="AvailableCount"
+                                           Text="0"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextAccentBrush}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="1" ToolTip.Tip="Offers you saved to your Wishlist on this PC."
+                                Background="{DynamicResource CardBrush}"
+                                CornerRadius="10"
+                                Padding="12">
+                            <StackPanel Spacing="2">
+                                <TextBlock Text="WISHLIST"
+                                           Classes="muted"/>
+                                <TextBlock x:Name="WishlistCount"
+                                           Text="0"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextAccentBrush}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" ToolTip.Tip="Estimated retail value advertised by providers, counting a title once. Not verified savings or money paid."
+                                Background="{DynamicResource CardBrush}"
+                                CornerRadius="10"
+                                Padding="12">
+                            <StackPanel Spacing="2">
+                                <TextBlock Text="POTENTIAL SAVINGS"
+                                           Classes="muted"/>
+                                <TextBlock x:Name="SavingsCount"
+                                           Text="$0.00"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource WarningBrush}"/>
+                            </StackPanel>
+                        </Border>
+
+                    </Grid>
+
+                    <!-- PLATFORMS -->
+
+                    <StackPanel Spacing="7">
+
+                        <WrapPanel><TextBlock Text="Platforms" Width="74" VerticalAlignment="Center" Classes="muted"/>
+                            <Button x:Name="PlatformAll" Classes="selected"
+                                    Tag="All"
+                                    Click="Platform_Click">All Platforms</Button>
+                            <Button x:Name="PlatformPC" Tag="PC" Click="Platform_Click">PC</Button>
+                            <Button x:Name="PlatformAndroid" Tag="Android" Click="Platform_Click">Android</Button>
+                            <Button x:Name="PlatformPlayStation" Tag="PlayStation" Click="Platform_Click">PlayStation</Button>
+                            <Button x:Name="PlatformXbox" Tag="Xbox" Click="Platform_Click">Xbox</Button>
+                            <Button x:Name="PlatformIos" Tag="iOS" Click="Platform_Click">iOS</Button>
+                        </WrapPanel>
+
+                    </StackPanel>
+
+                    <!-- STORES -->
+
+                    <StackPanel Spacing="7">
+
+                        <WrapPanel><TextBlock Text="Stores" Width="74" VerticalAlignment="Center" Classes="muted" ToolTip.Tip="Click a store to select it; hold Ctrl to select several."/>
+                            <Button x:Name="StoreAll" Classes="selected"
+                                    Tag="All"
+                                    Click="Store_Click">All Stores</Button>
+                            <Button x:Name="StoreEpic" Tag="Epic Games" Click="Store_Click">Epic Games</Button>
+                            <Button x:Name="StoreSteam" Tag="Steam" Click="Store_Click">Steam</Button>
+                            <Button x:Name="StoreDrmFree" Tag="DRM-Free" Click="Store_Click">DRM-Free</Button>
+                            <Button x:Name="StoreGog" Tag="GOG" Click="Store_Click">GOG</Button>
+                            <Button x:Name="StoreItch" Tag="Itch.io" Click="Store_Click">Itch.io</Button>
+                            <Button x:Name="StoreUbisoft" Tag="Ubisoft" Click="Store_Click">Ubisoft</Button>
+                            <Button x:Name="StoreCheapShark" Tag="CheapShark" Click="Store_Click">CheapShark</Button>
+                        </WrapPanel>
+
+                    </StackPanel>
+
+                    <TextBlock x:Name="FilterSummary" IsVisible="False"
+                               Foreground="{DynamicResource MutedTextBrush}"
+                               FontSize="12"
+                               TextWrapping="Wrap" />
+
+                    <!-- SORTING -->
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <TextBlock x:Name="ActiveFiltersText" Text="Offers" Classes="muted" VerticalAlignment="Center"/>
+
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    Spacing="7"
+                                    VerticalAlignment="Center">
+
+                            <TextBlock Text="SORT:"
+                                       Classes="muted"
+                                       VerticalAlignment="Center"/>
+
+                            <ComboBox x:Name="SortBox"
+                                      Width="165"
+                                      SelectedIndex="0"
+                                      SelectionChanged="Sort_Changed">
+                                <ComboBoxItem Content="Newest First"/>
+                                <ComboBoxItem Content="Highest Value"/>
+                                <ComboBoxItem Content="Expiring Soon"/>
+                                <ComboBoxItem Content="Title A-Z"/>
+                            </ComboBox>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                    <StackPanel Spacing="6" Margin="0,6,0,10">
+                        <Button x:Name="FeedsButton" Content="ⓘ Feeds" Click="FeedDetails_Click" HorizontalAlignment="Left" Padding="8,4" Margin="0"
+                                AutomationProperties.Name="Provider status; click to show or hide details"/>
+                        <Border x:Name="SourceDetailsPanel" IsVisible="False" Background="{DynamicResource PanelBrush}" CornerRadius="8" Padding="12">
+                            <TextBlock x:Name="SourceHealthText" Classes="muted" TextWrapping="Wrap"/>
+                        </Border>
+                    </StackPanel>
+                    <!-- GAME CARDS -->
+
+                    <ItemsControl x:Name="OffersList"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="models:OfferGroup">
+                                <Expander Header="{Binding Summary}" IsExpanded="True" Width="302" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,12,12"
+                                          Background="{DynamicResource PanelBrush}" Foreground="{DynamicResource PrimaryTextBrush}" BorderBrush="{DynamicResource BorderBrush}">
+                    <Expander.HeaderTemplate><DataTemplate><TextBlock Text="{Binding}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxLines="2" MaxWidth="222" ToolTip.Tip="{Binding}"/></DataTemplate></Expander.HeaderTemplate><ItemsControl ItemsSource="{Binding Routes}">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="models:GameOffer">
+
+                                <Border Width="270" Background="{DynamicResource CardBrush}" BorderBrush="{DynamicResource BorderBrush}"
+                                        BorderThickness="1" CornerRadius="12" Padding="13" Margin="0,0,12,12">
+                                    <StackPanel Spacing="9">
+                                        <Button Classes="offer-title" Tag="{Binding}" Click="Details_Click" AutomationProperties.Name="{Binding Title, StringFormat='Details for {0}'}">
+                                            <ToolTip.Tip><TextBlock Text="{Binding TitleTooltip}" MaxWidth="360" TextWrapping="Wrap"/></ToolTip.Tip>
+                                            <Border Background="{DynamicResource InputBrush}" CornerRadius="8" Height="120" Width="242" ClipToBounds="True">
+                                                <Image Source="{Binding CoverImage}" Stretch="UniformToFill"/>
+                                            </Border>
+                                        </Button>
+                                        <Button Classes="offer-title" Tag="{Binding}" Click="Details_Click" AutomationProperties.Name="{Binding Title, StringFormat='Details for {0}'}">
+                                            <ToolTip.Tip><TextBlock Text="{Binding TitleTooltip}" MaxWidth="360" TextWrapping="Wrap"/></ToolTip.Tip>
+                                            <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="SemiBold" MaxLines="2" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"/>
+                                        </Button>
+                                        <Grid ColumnDefinitions="*,Auto" ToolTip.Tip="{Binding OriginTooltip}">
+                                            <TextBlock Text="{Binding ClaimVia}" Classes="muted" FontSize="11" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                            <Border Grid.Column="1" Background="{DynamicResource BadgeBrush}" CornerRadius="5" Padding="6,3" ToolTip.Tip="{Binding FreshnessTooltip}">
+                                                <TextBlock Text="{Binding CompactState}" FontSize="10" Foreground="{DynamicResource MutedTextBrush}"/>
+                                            </Border>
+                                        </Grid>
+                                        <TextBlock Text="{Binding ValueSummary}" Foreground="{DynamicResource TextAccentBrush}" FontWeight="SemiBold" ToolTip.Tip="{Binding OriginalValueText}"/>
+                                        <Grid ColumnDefinitions="Auto,Auto,Auto,*,Auto,Auto">
+                                            <Button Classes="offer-icon" Classes.status-warning="{Binding HasAddressWarning}" Content="{Binding LinkStatusGlyph}" Tag="{Binding}" Click="Details_Click"
+                                                    AutomationProperties.Name="Address status; show offer details" AutomationProperties.HelpText="{Binding LinkTooltip}">
+                                                <ToolTip.Tip><TextBlock Text="{Binding LinkTooltip}" MaxWidth="360" TextWrapping="Wrap"/></ToolTip.Tip>
+                                            </Button>
+                                            <Button Grid.Column="1" Classes="offer-icon" Classes.status-good="{Binding HasVerifiedPrice}" Classes.status-warning="{Binding HasPriceWarning}"
+                                                    Content="{Binding PriceStatusGlyph}" Tag="{Binding}" Click="Details_Click" AutomationProperties.Name="Price status; show offer details" AutomationProperties.HelpText="{Binding PriceTooltip}">
+                                                <ToolTip.Tip><TextBlock Text="{Binding PriceTooltip}" MaxWidth="360" TextWrapping="Wrap"/></ToolTip.Tip>
+                                            </Button>
+                                            <Button Grid.Column="2" Classes="offer-icon" Content="{Binding FreshnessGlyph}" Tag="{Binding}" Click="Details_Click"
+                                                    AutomationProperties.Name="Expiry and freshness; show offer details" AutomationProperties.HelpText="{Binding FreshnessTooltip}">
+                                                <ToolTip.Tip><TextBlock Text="{Binding FreshnessTooltip}" MaxWidth="360" TextWrapping="Wrap"/></ToolTip.Tip>
+                                            </Button>
+                                            <Button Grid.Column="4" Classes="offer-icon" Content="{Binding WishlistGlyph}" Tag="{Binding}" Click="Wishlist_Click"
+                                                    ToolTip.Tip="{Binding WishlistLabel}" AutomationProperties.Name="{Binding WishlistLabel}"/>
+                                            <Button Grid.Column="5" Classes="offer-icon" Content="{Binding ClaimedGlyph}" Tag="{Binding}" Click="MarkClaimed_Click"
+                                                    ToolTip.Tip="{Binding ClaimedLabel}" AutomationProperties.Name="{Binding ClaimedLabel}"/>
+                                        </Grid>
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="6">
+                                            <Border ToolTip.Tip="{Binding DisabledReason}">
+                                                <Button Content="Open website ↗" Tag="{Binding}" Click="Claim_Click" IsEnabled="{Binding ClaimButtonEnabled}" HorizontalAlignment="Stretch"
+                                                        Background="{DynamicResource AccentBrush}" Foreground="{DynamicResource OnAccentBrush}" Margin="0" Padding="7,8"/>
+                                            </Border>
+                                            <Button Grid.Column="1" Content="Details" Tag="{Binding}" Click="Details_Click" Margin="0" Padding="9,8" AutomationProperties.Name="{Binding Title, StringFormat='Offer details for {0}'}"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+                                </Expander>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBlock x:Name="EmptyMessage"
+                               Text="No games match your filters."
+                               Foreground="{DynamicResource MutedTextBrush}"
+                               HorizontalAlignment="Center"
+                               IsVisible="False"
+                               Margin="10"/>
+
+                    <StackPanel HorizontalAlignment="Center"
+                                Spacing="5"
+                                Margin="0,15">
+                        <TextBlock Text="LOOTDROP • YOUR GAME LIBRARY, WITHOUT THE PRICE TAG."
+                                   Foreground="{DynamicResource MutedTextBrush}"
+                                   FontSize="9"
+                                   HorizontalAlignment="Center"/>
+                        <Button Click="GamerPower_Click"
+                                Background="Transparent"
+                                Foreground="{DynamicResource MutedTextBrush}"
+                                FontSize="10"
+                                HorizontalAlignment="Center">
+                            Giveaway data from GamerPower.com
+                        </Button>
+                        <Button Click="CheapShark_Click"
+                                Background="Transparent"
+                                Foreground="{DynamicResource MutedTextBrush}"
+                                FontSize="10"
+                                HorizontalAlignment="Center">CheapShark.com price data / deal links</Button>
+                    </StackPanel>
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+            <!-- Dedicated settings page: no settings panel in Discovery. -->
+            <ScrollViewer x:Name="SettingsScroll" Grid.Row="0"
+                          IsVisible="False" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="25" Spacing="20" MaxWidth="820" HorizontalAlignment="Left">
+                    <TextBlock Text="PREFERENCES" Foreground="{DynamicResource AccentBrightBrush}" FontSize="11" FontWeight="Bold"/>
+                    <TextBlock Text="Settings" Classes="heading"/>
+                    <TextBlock Text="Control how LootDrop launches, filters games and uses the system tray."
+                               Classes="muted" TextWrapping="Wrap"/>
+
+                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="DISCOVERY FILTERS" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <CheckBox x:Name="RememberFiltersCheck"
+                                      Content="Remember selected platforms and store on startup"
+                                      IsChecked="False" Foreground="{DynamicResource PrimaryTextBrush}"/>
+                            <TextBlock Text="Off: start with All Platforms and All Stores. On: restore your selected filters next launch."
+                                       TextWrapping="Wrap" Classes="muted"/>
+                            <Button Content="Clear filters (show all)" HorizontalAlignment="Left"
+                                    Click="ClearFilters_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="SYSTEM TRAY &amp; STARTUP" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <CheckBox x:Name="MinimizeToTrayCheck"
+                                      Content="Minimize to the system tray instead of the taskbar"
+                                      IsChecked="True" Foreground="{DynamicResource PrimaryTextBrush}"/>
+                            <CheckBox x:Name="CloseToTrayCheck"
+                                      Content="Close button sends LootDrop to the system tray"
+                                      IsChecked="False" Foreground="{DynamicResource PrimaryTextBrush}"/>
+                            <CheckBox x:Name="StartWithWindowsCheck"
+                                      Content="Start LootDrop with Windows, minimized to the tray"
+                                      IsChecked="False" Foreground="{DynamicResource PrimaryTextBrush}"/>
+                            <TextBlock Text="Windows startup uses a per-user startup entry; no administrator permission is required. When in the tray, right-click its icon for Show / Settings / Exit."
+                                       TextWrapping="Wrap" Classes="muted"/>
+                            <TextBlock x:Name="StartupStatusText" Foreground="{DynamicResource MutedTextBrush}"
+                                       FontSize="11" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="SIDEBAR" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <CheckBox x:Name="SidebarCollapsedCheck" Content="Use compact icon-only sidebar" Foreground="{DynamicResource PrimaryTextBrush}"/>
+                            <TextBlock Text="Sidebar position" Classes="muted"/>
+                            <ComboBox x:Name="SidebarPositionBox" Width="220" HorizontalAlignment="Left" SelectedIndex="0">
+                                <ComboBoxItem Content="Left"/>
+                                <ComboBoxItem Content="Right"/>
+                            </ComboBox>
+                            <TextBlock Text="The sidebar collapse button is always available. Icons have tooltips in compact mode." Classes="muted" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="PERFORMANCE &amp; APPEARANCE" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <TextBlock Text="Window opacity (65–100%)" Classes="muted"/>
+                            <Slider x:Name="WindowOpacitySlider" Minimum="65" Maximum="100" Value="100" TickFrequency="5"/>
+                            <TextBlock x:Name="WindowOpacityLabel" Classes="muted" Text="100%"/>
+                            <TextBlock Text="Wallpaper brightness (dark overlay)" Classes="muted"/>
+                            <Slider x:Name="WallpaperDimSlider" Minimum="0" Maximum="95" Value="72" TickFrequency="5"/>
+                            <TextBlock x:Name="WallpaperDimLabel" Classes="muted" Text="72% dimmed"/>
+                            <CheckBox x:Name="LowGraphicsCheck" Content="Low graphics mode (disable wallpaper and cover downloads; refresh after turning off)" Foreground="{DynamicResource PrimaryTextBrush}"/>
+                            <TextBlock Text="Graphics renderer (takes effect after restart)" Classes="muted"/>
+                            <ComboBox x:Name="RendererBox" Width="310" HorizontalAlignment="Left" SelectedIndex="0">
+                                <ComboBoxItem Content="Automatic (GPU with software fallback)"/>
+                                <ComboBoxItem Content="Software only (CPU)"/>
+                            </ComboBox>
+                            <TextBlock Text="Software mode may help with problematic graphics drivers, but can use more CPU. Lower window opacity is a visual effect, not a performance optimization." Classes="muted" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="BACKUPS &amp; PORTABLE LIBRARY" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <TextBlock Text="A local snapshot is saved before the first library change each day. The 20 newest automatic/recovery snapshots are retained. Export and import include saved games and named themes; device settings and wallpaper paths are not imported." Classes="muted" TextWrapping="Wrap"/>
+                            <WrapPanel>
+                                <Button Content="Export library…" Click="ExportLibrary_Click"/>
+                                <Button Content="Import / review…" Click="ImportLibrary_Click"/>
+                                <Button Content="Restore backup…" Click="RestoreBackup_Click"/>
+                            </WrapPanel>
+                            <TextBlock x:Name="LibraryTransferStatus" Classes="muted" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                    <!-- Read-only About section: credits and links will be populated in a future release. -->
+                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="ABOUT LOOTDROP" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <Border x:Name="DeveloperCredit" Background="{DynamicResource CardBrush}" Padding="12" CornerRadius="8">
+                                <Grid ColumnDefinitions="72,*" ColumnSpacing="14">
+                                    <Border Background="Black" Width="72" Height="72" CornerRadius="10" ClipToBounds="True"><Image x:Name="DeveloperArtwork" Source="/Assets/Branding/degenerates-inc-duo.png" RenderOptions.BitmapInterpolationMode="HighQuality" Stretch="Uniform" AutomationProperties.Name="Degenerates Inc. wolf, lion and raccoon artwork"/></Border>
+                                    <StackPanel Grid.Column="1" Spacing="5" VerticalAlignment="Center">
+                                        <TextBlock Text="Made by Degenerates Inc." FontWeight="SemiBold" TextWrapping="Wrap"/>
+                                        <TextBlock Text="Bad Decisions. Good Games." Classes="muted" TextWrapping="Wrap"/>
+                                        <TextBlock Text="An independently developed game-discovery app." FontSize="11" Classes="muted" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                            <TextBlock Text="LootDrop • Free game discovery, wishlist and claim tracking"
+                                       Foreground="{DynamicResource PrimaryTextBrush}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                            <TextBlock Text="Built to help you discover limited-time game giveaways, check claim destinations, and track your collection."
+                                       Classes="muted" TextWrapping="Wrap"/>
+                            <TextBlock Text="BETA TESTERS" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <TextBlock Text="Credits coming soon" Foreground="{DynamicResource PrimaryTextBrush}" TextWrapping="Wrap"/>
+                            <TextBlock Text="CONTRIBUTORS &amp; SPECIAL THANKS" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <TextBlock Text="Credits coming soon" Foreground="{DynamicResource PrimaryTextBrush}" TextWrapping="Wrap"/>
+                            <TextBlock Text="COMMUNITY &amp; SOCIAL LINKS" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <TextBlock Text="Discord and social links will be added in a future update."
+                                       Classes="muted" TextWrapping="Wrap"/>
+                            <TextBlock Text="Credits and links are published as part of LootDrop updates, not edited inside the app."
+                                       Classes="muted" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+                        <ScrollViewer x:Name="StoreSignInScroll" Grid.Row="0" IsVisible="False">
+                <StackPanel Margin="22" Spacing="16" MaxWidth="950" HorizontalAlignment="Left">
+                    <TextBlock Text="Store sign-in shortcuts" FontSize="26" FontWeight="Bold"/>
+                    <TextBlock Text="Sign in once in your browser, then return to an offer. These shortcuts open official websites in your default browser." TextWrapping="Wrap"/>
+                    <Border Padding="18" CornerRadius="10" Background="{DynamicResource PanelBrush}"><StackPanel Spacing="10">
+                        <TextBlock Text="Your sign-in stays with your browser and store" FontWeight="Bold"/>
+                        <TextBlock x:Name="StorePrivacyText" TextWrapping="Wrap" LineHeight="22"/>
+                    </StackPanel></Border>
+                    <ItemsControl x:Name="StoreSignInList"><ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="services:StoreSignInShortcut">
+                            <Border Padding="14" Margin="0,0,0,10" CornerRadius="8" Background="{DynamicResource CardBrush}">
+                                <StackPanel Spacing="5">
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Url}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Note}" Classes="muted" TextWrapping="Wrap"/>
+                                    <Button Content="Open official website ↗" Tag="{Binding Id}" Click="StoreSignIn_Click" HorizontalAlignment="Left" AutomationProperties.Name="{Binding Name, StringFormat='Open official {0} sign-in website in browser'}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate></ItemsControl>
+                    <TextBlock x:Name="StoreSessionText" TextWrapping="Wrap" LineHeight="22"/>
+                    <TextBlock x:Name="StoreSignInStatus" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"/>
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer x:Name="HelpScroll" Grid.Row="0" IsVisible="False">
+                <StackPanel Margin="25" Spacing="16" MaxWidth="850" HorizontalAlignment="Stretch">
+                    <TextBlock Text="HELP &amp; FEATURE GUIDE" Foreground="{DynamicResource TextAccentBrush}" FontSize="11" FontWeight="Bold"/>
+                    <TextBlock Text="How LootDrop works" Classes="heading" TextWrapping="Wrap"/>
+                    <TextBlock Text="Hover for quick hints, or click an icon or Details to read more. Press F1 to return to Help." Classes="muted" TextWrapping="Wrap"/>
+                    <TextBox x:Name="HelpSearchBox" MaxLength="120" PlaceholderText="Search help: icons, backups, cache, themes…" TextChanged="HelpSearch_TextChanged" AutomationProperties.Name="Search help"/>
+                    <WrapPanel>
+                        <Button Content="Discover games" Tag="discover" Click="Navigation_Click"/>
+                        <Button Content="Settings &amp; backups" Tag="settings" Click="Navigation_Click"/>
+                        <Button Content="Choose a theme" Tag="themes" Click="Navigation_Click"/>
+                    </WrapPanel>
+                    <ItemsControl x:Name="HelpTopics">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="services:HelpTopic">
+                                <Expander Header="{Binding Title}" IsExpanded="{Binding Expanded}" HorizontalAlignment="Stretch" Margin="0,0,0,10"
+                                          Background="{DynamicResource PanelBrush}" Foreground="{DynamicResource PrimaryTextBrush}">
+                                    <TextBlock Text="{Binding Body}" TextWrapping="Wrap" Margin="16" LineHeight="22"/>
+                                </Expander>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock x:Name="HelpEmptyText" Text="No matching topics. Try a shorter search." IsVisible="False" Classes="muted"/>
+                    <TextBlock Text="LootDrop version 2 · Windows · 0.7.9" Classes="muted"/>
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer x:Name="ThemesScroll" Grid.Row="0"
+                          IsVisible="False" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="25" Spacing="18" MaxWidth="820" HorizontalAlignment="Left">
+                    <TextBlock Text="APPEARANCE" Foreground="{DynamicResource AccentBrightBrush}" FontSize="11" FontWeight="Bold"/>
+                    <TextBlock Text="Themes" Classes="heading"/>
+                    <TextBlock Text="Choose a preset. Each combination coordinates backgrounds, text and accents; window and tray icons use a matching color. Custom accent colors use the nearest preset icon color."
+                               Classes="muted" TextWrapping="Wrap"/>
+                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="PRESET THEMES" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <WrapPanel>
+                                <Button Content="● Midnight Purple" Tag="Purple" Click="ThemePreset_Click"/>
+                                <Button Content="● Electric Blue" Tag="Blue" Click="ThemePreset_Click"/>
+                                <Button Content="● Neon Cyan" Tag="Cyan" Click="ThemePreset_Click"/>
+                                <Button Content="● Emerald" Tag="Green" Click="ThemePreset_Click"/>
+                                <Button Content="● Crimson" Tag="Red" Click="ThemePreset_Click"/>
+                                <Button Content="● Sunset Orange" Tag="Orange" Click="ThemePreset_Click"/>
+                                <Button Content="● Hot Pink" Tag="Pink" Click="ThemePreset_Click"/>
+                                <Button Content="● Gold" Tag="Gold" Click="ThemePreset_Click"/>
+                            </WrapPanel>
+                            <TextBlock Text="COLOR COMBINATIONS · DARK / LIGHT / PASTEL / NEON" FontWeight="SemiBold" Foreground="{DynamicResource TextAccentBrush}" Margin="0,14,0,0" TextWrapping="Wrap"/>
+                            <WrapPanel>
+                                <Button Tag="Obsidian Ice" Click="ThemePreset_Click" MinWidth="226" HorizontalContentAlignment="Left">
+                                    <StackPanel Spacing="5">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#090D14"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#72DDF7"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#F0F7FF"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Obsidian Ice" FontWeight="SemiBold"/>
+                                        <TextBlock Text="Dark · charcoal + ice blue" FontSize="10"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Tag="Crimson Noir" Click="ThemePreset_Click" MinWidth="226" HorizontalContentAlignment="Left">
+                                    <StackPanel Spacing="5">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#120C12"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#FF647C"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#FFF1F5"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Crimson Noir" FontWeight="SemiBold"/>
+                                        <TextBlock Text="Dark · black cherry + rose" FontSize="10"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Tag="Forest Night" Click="ThemePreset_Click" MinWidth="226" HorizontalContentAlignment="Left">
+                                    <StackPanel Spacing="5">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#0B1512"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#68E0B0"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#EFFCF5"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Forest Night" FontWeight="SemiBold"/>
+                                        <TextBlock Text="Dark · pine + sea glass" FontSize="10"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Tag="Arctic Day" Click="ThemePreset_Click" MinWidth="226" HorizontalContentAlignment="Left">
+                                    <StackPanel Spacing="5">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#EFF5FB"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#1969C9"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#15263C"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Arctic Day" FontWeight="SemiBold"/>
+                                        <TextBlock Text="Light · cloud + cobalt" FontSize="10"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Tag="Peach Cream" Click="ThemePreset_Click" MinWidth="226" HorizontalContentAlignment="Left">
+                                    <StackPanel Spacing="5">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#FFF3E9"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#AC4C39"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#3B2926"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Peach Cream" FontWeight="SemiBold"/>
+                                        <TextBlock Text="Light · cream + terracotta" FontSize="10"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Tag="Lavender Cloud" Click="ThemePreset_Click" MinWidth="226" HorizontalContentAlignment="Left">
+                                    <StackPanel Spacing="5">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#F3EFFB"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#7353B6"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#302742"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Lavender Cloud" FontWeight="SemiBold"/>
+                                        <TextBlock Text="Pastel · lilac + plum" FontSize="10"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Tag="Mint Sorbet" Click="ThemePreset_Click" MinWidth="226" HorizontalContentAlignment="Left">
+                                    <StackPanel Spacing="5">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#EDF9F2"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#23795F"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#1C382D"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Mint Sorbet" FontWeight="SemiBold"/>
+                                        <TextBlock Text="Pastel · mint + evergreen" FontSize="10"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Tag="Rosewater" Click="ThemePreset_Click" MinWidth="226" HorizontalContentAlignment="Left">
+                                    <StackPanel Spacing="5">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#FDF0F6"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#A24D76"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#412536"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Rosewater" FontWeight="SemiBold"/>
+                                        <TextBlock Text="Pastel · blush + mulberry" FontSize="10"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Tag="Cyber Lime" Click="ThemePreset_Click" MinWidth="226" HorizontalContentAlignment="Left">
+                                    <StackPanel Spacing="5">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#10130C"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#CAFF42"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#F3FFE4"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Cyber Lime" FontWeight="SemiBold"/>
+                                        <TextBlock Text="Neon · graphite + acid lime" FontSize="10"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Tag="Neon Arcade" Click="ThemePreset_Click" MinWidth="226" HorizontalContentAlignment="Left">
+                                    <StackPanel Spacing="5">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#110D20"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#FF5CE1"/>
+                                            <Border Width="30" Height="12" CornerRadius="3" Background="#FFF0FF"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Neon Arcade" FontWeight="SemiBold"/>
+                                        <TextBlock Text="Neon · midnight violet + hot pink" FontSize="10"/>
+                                    </StackPanel>
+                                </Button>
+                            </WrapPanel>
+                            <TextBlock x:Name="ThemeStatusText" Foreground="{DynamicResource MutedTextBrush}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="CUSTOM ACCENT — HEX / RGB" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <TextBlock Text="Enter a HEX value (#RRGGBB), or adjust the red, green and blue channels (0–255)."
+                                       Classes="muted" TextWrapping="Wrap"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <StackPanel Spacing="5"><TextBlock Text="HEX" Classes="muted"/><TextBox x:Name="CustomHexBox" Width="125" Text="#A448F4"/></StackPanel>
+                                <StackPanel Spacing="5"><TextBlock Text="R" Classes="muted"/><TextBox x:Name="RedBox" Width="60" Text="164"/></StackPanel>
+                                <StackPanel Spacing="5"><TextBlock Text="G" Classes="muted"/><TextBox x:Name="GreenBox" Width="60" Text="72"/></StackPanel>
+                                <StackPanel Spacing="5"><TextBlock Text="B" Classes="muted"/><TextBox x:Name="BlueBox" Width="60" Text="244"/></StackPanel>
+                            </StackPanel>
+                            <WrapPanel>
+                                <Button Content="Apply HEX" Click="ApplyCustomHex_Click"/>
+                                <Button Content="Apply RGB" Click="ApplyCustomRgb_Click"/>
+                            </WrapPanel>
+                            <Border x:Name="CustomColorSwatch" Height="30" CornerRadius="6" Background="#A448F4"/>
+                            <TextBlock x:Name="ThemeErrorText" Foreground="{DynamicResource MutedTextBrush}" TextWrapping="Wrap"/>
+                            <TextBlock Text="RGB PICKER — drag the sliders to preview" Foreground="{DynamicResource AccentBrightBrush}" FontWeight="Bold"/>
+                            <TextBlock Text="Red" Classes="muted"/>
+                            <Slider x:Name="RedSlider" Minimum="0" Maximum="255" Value="164"/>
+                            <TextBlock Text="Green" Classes="muted"/>
+                            <Slider x:Name="GreenSlider" Minimum="0" Maximum="255" Value="72"/>
+                            <TextBlock Text="Blue" Classes="muted"/>
+                            <Slider x:Name="BlueSlider" Minimum="0" Maximum="255" Value="244"/>
+                            <TextBlock Text="SAVE A NAMED CUSTOM THEME" Foreground="{DynamicResource AccentBrightBrush}" FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBox x:Name="CustomThemeNameBox" Width="220" PlaceholderText="My custom theme"/>
+                                <Button Content="Save theme" Click="SaveCustomTheme_Click"/>
+                            </StackPanel>
+                            <ComboBox x:Name="SavedThemesBox" Width="280" HorizontalAlignment="Left" PlaceholderText="Saved custom themes"/>
+                            <WrapPanel>
+                                <Button Content="Load selected" Click="LoadSavedTheme_Click"/>
+                                <Button Content="Delete selected" Click="DeleteSavedTheme_Click"/>
+                            </WrapPanel>
+                            <TextBlock x:Name="CustomThemeStatusText" Classes="muted" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="CUSTOM BACKGROUND IMAGE" Foreground="{DynamicResource AccentBrightBrush}" FontWeight="Bold"/>
+                            <TextBlock Text="Choose a JPG or PNG wallpaper. LootDrop copies it to its local settings folder; a dark overlay keeps text readable."
+                                       Classes="muted" TextWrapping="Wrap"/>
+                            <WrapPanel>
+                                <Button Content="Choose background image…" Click="ChooseBackground_Click"/>
+                                <Button Content="Remove background" Click="RemoveBackground_Click"/>
+                            </WrapPanel>
+                            <TextBlock x:Name="BackgroundStatusText" Classes="muted" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+            </Grid>
+
+        </Grid>
+
+        <Grid x:Name="OfferDetailsOverlay" Grid.ColumnSpan="2" IsVisible="False" ZIndex="50" x:DataType="models:GameOffer">
+            <Border Background="#99000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PointerPressed="DetailsBackdrop_PointerPressed"/>
+            <Border Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,0,0" Width="460" HorizontalAlignment="Right" Padding="22">
+                <Grid RowDefinitions="Auto,*">
+                    <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,16">
+                        <TextBlock Text="OFFER DETAILS" Foreground="{DynamicResource TextAccentBrush}" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                        <Button x:Name="CloseOfferDetailsButton" Grid.Column="1" Content="✕" Click="CloseDetails_Click" ToolTip.Tip="Close details (Esc)" AutomationProperties.Name="Close offer details"/>
+                    </Grid>
+                    <ScrollViewer Grid.Row="1">
+                        <StackPanel Spacing="16">
+                            <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding PlatformStore}" Classes="muted" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding OriginalValueText}" Foreground="{DynamicResource TextAccentBrush}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                            <TextBlock Text="PRICE &amp; AVAILABILITY" FontWeight="SemiBold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <TextBlock Text="{Binding VerificationLabel}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding PriceEvidence}" Classes="muted" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding ExpirationText}" TextWrapping="Wrap"/>
+                            <TextBlock Text="DESTINATION" FontWeight="SemiBold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <TextBlock Text="{Binding DestinationHost}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                            <TextBox Text="{Binding DisplayClaimUrl, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" MaxHeight="100" AutomationProperties.Name="Full claim destination address"/>
+                            <TextBlock Text="{Binding ClaimRouteNotice}" Classes="muted" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding AvailabilityNote}" Classes="muted" TextWrapping="Wrap"/>
+                            <TextBlock Text="WHEN CHECKED" FontWeight="SemiBold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <TextBlock Text="{Binding FeedTimeText}" Classes="muted" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding PriceTimeText}" Classes="muted" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding AddressTimeText}" Classes="muted" TextWrapping="Wrap"/>
+                            <TextBlock Text="REGION &amp; ELIGIBILITY" FontWeight="SemiBold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <TextBlock Text="{Binding RegionalNotice}" Classes="muted" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding DisabledReason}" Foreground="{DynamicResource WarningBrush}" TextWrapping="Wrap"/>
+                            <Button Content="Review website destination…" Tag="{Binding}" Click="Claim_Click" IsEnabled="{Binding ClaimButtonEnabled}" HorizontalAlignment="Stretch"
+                                    Background="{DynamicResource AccentBrush}" Foreground="{DynamicResource OnAccentBrush}"/>
+                            <TextBlock Text="YOUR TRACKING" FontWeight="SemiBold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <Button Content="{Binding WishlistLabel}" Tag="{Binding}" Click="Wishlist_Click" HorizontalAlignment="Stretch"/>
+                            <Button Content="{Binding ClaimedLabel}" Tag="{Binding}" Click="MarkClaimed_Click" HorizontalAlignment="Stretch"/>
+                            <Button Content="{Binding ReportLabel}" Tag="{Binding}" Click="ReportNotFree_Click" HorizontalAlignment="Stretch"/>
+                            <Button Content="Help with these icons" Click="OfferHelp_Click" HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+
+</Window>
+
+
+
+
+
+
+

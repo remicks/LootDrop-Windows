@@ -1,0 +1,3 @@
+PASS parsed Build-Tester-Releases.ps1
+PASS parsed Build-Windows.ps1
+PASS simulated failed dependency audit stops before publishing

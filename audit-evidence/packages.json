@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "parameters": "--include-transitive",
+  "projects": [
+    {
+      "path": "C:/Users/lostj/Documents/Codex/2026-11-03/referenced-chatgpt-conversation-this-is-an/work/LootDrop-v2-security/LootDrop.csproj",
+      "frameworks": [
+        {
+          "framework": "net10.0",
+          "topLevelPackages": [
+            {
+              "id": "Avalonia",
+              "requestedVersion": "12.1.5",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "Avalonia.Desktop",
+              "requestedVersion": "12.1.5",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "Avalonia.Fonts.Inter",
+              "requestedVersion": "12.1.5",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "Avalonia.Themes.Fluent",
+              "requestedVersion": "12.1.5",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "CommunityToolkit.Mvvm",
+              "requestedVersion": "8.4.2",
+              "resolvedVersion": "8.4.2"
+            },
+            {
+              "id": "SkiaSharp",
+              "requestedVersion": "3.119.4",
+              "resolvedVersion": "3.119.4"
+            }
+          ],
+          "transitivePackages": [
+            {
+              "id": "Avalonia.Angle.Windows.Natives",
+              "resolvedVersion": "2.1.27548.20260419"
+            },
+            {
+              "id": "Avalonia.BuildServices",
+              "resolvedVersion": "11.3.2"
+            },
+            {
+              "id": "Avalonia.FreeDesktop",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "Avalonia.FreeDesktop.AtSpi",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "Avalonia.HarfBuzz",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "Avalonia.Native",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "Avalonia.Remote.Protocol",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "Avalonia.Skia",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "Avalonia.Win32",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "Avalonia.X11",
+              "resolvedVersion": "12.1.5"
+            },
+            {
+              "id": "HarfBuzzSharp",
+              "resolvedVersion": "8.3.1.3"
+            },
+            {
+              "id": "HarfBuzzSharp.NativeAssets.Linux",
+              "resolvedVersion": "8.3.1.3"
+            },
+            {
+              "id": "HarfBuzzSharp.NativeAssets.macOS",
+              "resolvedVersion": "8.3.1.3"
+            },
+            {
+              "id": "HarfBuzzSharp.NativeAssets.WebAssembly",
+              "resolvedVersion": "8.3.1.3"
+            },
+            {
+              "id": "HarfBuzzSharp.NativeAssets.Win32",
+              "resolvedVersion": "8.3.1.3"
+            },
+            {
+              "id": "MicroCom.Runtime",
+              "resolvedVersion": "0.11.6"
+            },
+            {
+              "id": "SkiaSharp.NativeAssets.Linux",
+              "resolvedVersion": "3.119.4"
+            },
+            {
+              "id": "SkiaSharp.NativeAssets.macOS",
+              "resolvedVersion": "3.119.4"
+            },
+            {
+              "id": "SkiaSharp.NativeAssets.WebAssembly",
+              "resolvedVersion": "3.119.4"
+            },
+            {
+              "id": "SkiaSharp.NativeAssets.Win32",
+              "resolvedVersion": "3.119.4"
+            },
+            {
+              "id": "Tmds.DBus.Protocol",
+              "resolvedVersion": "0.94.1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+PASS: Simulated failed restore stopped before publish; no stale binaries packaged.

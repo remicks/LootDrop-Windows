@@ -1,0 +1,15 @@
+**/bin/
+**/obj/
+dist/
+.vs/
+.idea/
+*.user
+*.suo
+*.pfx
+*.pem
+.env
+.env.*
+library.json
+FeedCache/
+Backups/
+Backgrounds/

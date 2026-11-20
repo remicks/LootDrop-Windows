@@ -1,0 +1,317 @@
+PASS URL blocked: http://store.epicgames.com/p/a
+PASS URL blocked: file:///C:/test.exe
+PASS URL blocked: javascript:alert(1)
+PASS URL blocked: steam://run/123
+PASS URL blocked: https://user:password@store.epicgames.com/a
+PASS URL blocked: https://localhost/a
+PASS URL blocked: https://127.0.0.1/a
+PASS URL blocked: https://[::1]/
+PASS URL blocked: https://169.254.169.254/
+PASS URL blocked: https://192.168.1.1/
+PASS URL blocked: https://store.epicgames.com:444/a
+PASS URL blocked: https://server.internal/a
+PASS URL blocked: https://server.local/a
+PASS URL blocked: https://store.epicgames.com/Injected
+PASS URL blocked: https://store.epicgames.com\@evil.com/
+PASS Direct HTTPS store supported
+PASS Independent HTTPS store remains manually usable
+PASS Unknown automatic image host blocked
+PASS Image suffix spoof blocked
+PASS Known image CDN supported
+PASS Domain substring spoof rejected
+PASS Unsafe claim check rejected without fetching
+PASS Safe claim remains unverified without fetching
+PASS Claim cancellation honored
+PASS Exact HTTP size boundary accepted
+PASS Declared oversized HTTP body blocked
+PASS Streaming oversized HTTP body blocked without Content-Length
+PASS Redirect response not consumed as success
+PASS Streaming body cancellation enforced
+PASS Steam URL embedded in attacker path cannot verify
+PASS Epic platform label cannot verify unrelated URL
+PASS Model blocks unsafe claim before background checks
+PASS Encoded image size enforced
+PASS Invalid image rejected
+PASS UNC wallpaper blocked before file access
+PASS Wallpaper outside managed folder rejected
+PASS Valid PNG header accepted
+PASS Excessive image width rejected before Bitmap decode
+PASS Missing library loads defaults
+PASS Library round-trip preserves games
+PASS Atomic write leaves no temporary file
+PASS Corrupt library reported
+PASS Corrupt library cannot be overwritten by autosave
+PASS Original corrupt data preserved
+PASS Null library collection rejected
+PASS Library values that could overflow statistics rejected
+PASS Oversized library titles rejected before regex statistics
+PASS Oversized local library rejected
+PASS Central HTTP helper refuses non-HTTPS before dispatch
+PASS Invalid custom theme cannot be saved
+PASS Invalid theme save leaves original file unchanged
+PASS Null custom theme color rejected without UI failure
+PASS Same numeric ID across providers stays separate
+PASS Native IDs prevent within-provider hash collisions
+PASS Presentation groups exact titles but preserves edition variants and every route
+PASS Grouping never shares personal flags between routes
+PASS Truncated Unicode title cannot crash grouping
+PASS First daily change creates a recovery snapshot
+PASS Repeated changes do not churn daily backups
+PASS Incomplete daily snapshot cannot be silently trusted
+PASS A failed backup preserves the current library
+PASS Import preview does not change the current library
+PASS Raw or foreign JSON cannot masquerade as a portable export
+PASS Backup path traversal rejected
+PASS Oversized import rejected before parsing
+PASS Reviewed replacement imports collection but preserves local startup/appearance settings
+PASS Imported wallpaper paths never activate
+PASS Applying replacement creates a recovery backup first
+PASS Changed target library invalidates an old import preview
+PASS Duplicate identities in imported data are rejected
+PASS Reviewed restore can recover an unreadable library
+PASS Recovery preserves the corrupt original bytes in a snapshot
+PASS Managed snapshot retention is bounded to twenty files
+PASS Cache reload is stale, unclaimable and not authoritative for personal flags
+PASS Successful empty refresh retires previous cache content
+PASS Cache path/source traversal rejected
+PASS Malformed cache is rejected without touching the library
+PASS Accepted address never implies verified price
+PASS Hover text distinguishes address format, price and destination trust
+PASS Missing price timestamp is not invented
+PASS Live verified price has a distinct positive icon
+PASS Price time and hover bindings update with real check metadata
+PASS Rejected price has a warning icon and cannot open
+PASS Live-feed invalidation updates claim bindings immediately
+PASS Cached evidence never gets a live verified icon or enabled claim
+PASS Unsupported destinations are blocked even in the details presentation
+PASS Expiry icon and explanation retain the opening restriction
+PASS Saved records retain provider age but never resurrect price verification
+PASS Plain-language help is searchable without network access
+PASS Eight existing plus ten new theme presets available
+PASS Five genuinely light/pastel palettes available
+PASS Unknown theme safely falls back to original Purple
+PASS Purple: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Purple: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Purple: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Purple: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Purple: WarningBrush contrast >= 4.5 on all surfaces
+PASS Purple: selected and hovered button text remains readable
+PASS Purple: extreme custom accent text remains readable
+PASS Blue: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Blue: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Blue: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Blue: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Blue: WarningBrush contrast >= 4.5 on all surfaces
+PASS Blue: selected and hovered button text remains readable
+PASS Blue: extreme custom accent text remains readable
+PASS Cyan: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Cyan: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Cyan: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Cyan: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Cyan: WarningBrush contrast >= 4.5 on all surfaces
+PASS Cyan: selected and hovered button text remains readable
+PASS Cyan: extreme custom accent text remains readable
+PASS Green: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Green: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Green: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Green: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Green: WarningBrush contrast >= 4.5 on all surfaces
+PASS Green: selected and hovered button text remains readable
+PASS Green: extreme custom accent text remains readable
+PASS Red: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Red: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Red: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Red: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Red: WarningBrush contrast >= 4.5 on all surfaces
+PASS Red: selected and hovered button text remains readable
+PASS Red: extreme custom accent text remains readable
+PASS Orange: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Orange: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Orange: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Orange: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Orange: WarningBrush contrast >= 4.5 on all surfaces
+PASS Orange: selected and hovered button text remains readable
+PASS Orange: extreme custom accent text remains readable
+PASS Pink: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Pink: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Pink: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Pink: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Pink: WarningBrush contrast >= 4.5 on all surfaces
+PASS Pink: selected and hovered button text remains readable
+PASS Pink: extreme custom accent text remains readable
+PASS Gold: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Gold: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Gold: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Gold: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Gold: WarningBrush contrast >= 4.5 on all surfaces
+PASS Gold: selected and hovered button text remains readable
+PASS Gold: extreme custom accent text remains readable
+PASS Obsidian Ice: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Obsidian Ice: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Obsidian Ice: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Obsidian Ice: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Obsidian Ice: WarningBrush contrast >= 4.5 on all surfaces
+PASS Obsidian Ice: selected and hovered button text remains readable
+PASS Obsidian Ice: extreme custom accent text remains readable
+PASS Crimson Noir: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Crimson Noir: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Crimson Noir: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Crimson Noir: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Crimson Noir: WarningBrush contrast >= 4.5 on all surfaces
+PASS Crimson Noir: selected and hovered button text remains readable
+PASS Crimson Noir: extreme custom accent text remains readable
+PASS Forest Night: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Forest Night: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Forest Night: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Forest Night: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Forest Night: WarningBrush contrast >= 4.5 on all surfaces
+PASS Forest Night: selected and hovered button text remains readable
+PASS Forest Night: extreme custom accent text remains readable
+PASS Arctic Day: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Arctic Day: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Arctic Day: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Arctic Day: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Arctic Day: WarningBrush contrast >= 4.5 on all surfaces
+PASS Arctic Day: selected and hovered button text remains readable
+PASS Arctic Day: extreme custom accent text remains readable
+PASS Peach Cream: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Peach Cream: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Peach Cream: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Peach Cream: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Peach Cream: WarningBrush contrast >= 4.5 on all surfaces
+PASS Peach Cream: selected and hovered button text remains readable
+PASS Peach Cream: extreme custom accent text remains readable
+PASS Lavender Cloud: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Lavender Cloud: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Lavender Cloud: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Lavender Cloud: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Lavender Cloud: WarningBrush contrast >= 4.5 on all surfaces
+PASS Lavender Cloud: selected and hovered button text remains readable
+PASS Lavender Cloud: extreme custom accent text remains readable
+PASS Mint Sorbet: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Mint Sorbet: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Mint Sorbet: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Mint Sorbet: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Mint Sorbet: WarningBrush contrast >= 4.5 on all surfaces
+PASS Mint Sorbet: selected and hovered button text remains readable
+PASS Mint Sorbet: extreme custom accent text remains readable
+PASS Rosewater: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Rosewater: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Rosewater: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Rosewater: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Rosewater: WarningBrush contrast >= 4.5 on all surfaces
+PASS Rosewater: selected and hovered button text remains readable
+PASS Rosewater: extreme custom accent text remains readable
+PASS Cyber Lime: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Cyber Lime: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Cyber Lime: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Cyber Lime: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Cyber Lime: WarningBrush contrast >= 4.5 on all surfaces
+PASS Cyber Lime: selected and hovered button text remains readable
+PASS Cyber Lime: extreme custom accent text remains readable
+PASS Neon Arcade: PrimaryTextBrush contrast >= 4.5 on all surfaces
+PASS Neon Arcade: MutedTextBrush contrast >= 4.5 on all surfaces
+PASS Neon Arcade: TextAccentBrush contrast >= 4.5 on all surfaces
+PASS Neon Arcade: SuccessBrush contrast >= 4.5 on all surfaces
+PASS Neon Arcade: WarningBrush contrast >= 4.5 on all surfaces
+PASS Neon Arcade: selected and hovered button text remains readable
+PASS Neon Arcade: extreme custom accent text remains readable
+PASS Runtime purple window/tray icon remains embedded and decodes
+PASS Runtime blue window/tray icon remains embedded and decodes
+PASS Runtime cyan window/tray icon remains embedded and decodes
+PASS Runtime green window/tray icon remains embedded and decodes
+PASS Runtime red window/tray icon remains embedded and decodes
+PASS Runtime orange window/tray icon remains embedded and decodes
+PASS Runtime pink window/tray icon remains embedded and decodes
+PASS Runtime gold window/tray icon remains embedded and decodes
+PASS Unused PNG previews are excluded from runtime assets
+PASS All eighteen presets have selectable UI buttons
+PASS Purple: selection persists
+PASS Purple: palette reaches actual window resources
+PASS Purple: actual HEX input text remains readable
+PASS Blue: selection persists
+PASS Blue: palette reaches actual window resources
+PASS Blue: actual HEX input text remains readable
+PASS Cyan: selection persists
+PASS Cyan: palette reaches actual window resources
+PASS Cyan: actual HEX input text remains readable
+PASS Green: selection persists
+PASS Green: palette reaches actual window resources
+PASS Green: actual HEX input text remains readable
+PASS Red: selection persists
+PASS Red: palette reaches actual window resources
+PASS Red: actual HEX input text remains readable
+PASS Orange: selection persists
+PASS Orange: palette reaches actual window resources
+PASS Orange: actual HEX input text remains readable
+PASS Pink: selection persists
+PASS Pink: palette reaches actual window resources
+PASS Pink: actual HEX input text remains readable
+PASS Gold: selection persists
+PASS Gold: palette reaches actual window resources
+PASS Gold: actual HEX input text remains readable
+PASS Obsidian Ice: selection persists
+PASS Obsidian Ice: palette reaches actual window resources
+PASS Obsidian Ice: actual HEX input text remains readable
+PASS Crimson Noir: selection persists
+PASS Crimson Noir: palette reaches actual window resources
+PASS Crimson Noir: actual HEX input text remains readable
+PASS Forest Night: selection persists
+PASS Forest Night: palette reaches actual window resources
+PASS Forest Night: actual HEX input text remains readable
+PASS Arctic Day: selection persists
+PASS Arctic Day: palette reaches actual window resources
+PASS Arctic Day: actual HEX input text remains readable
+PASS Arctic Day: synthetic collection card renders without network access
+PASS Peach Cream: selection persists
+PASS Peach Cream: palette reaches actual window resources
+PASS Peach Cream: actual HEX input text remains readable
+PASS Lavender Cloud: selection persists
+PASS Lavender Cloud: palette reaches actual window resources
+PASS Lavender Cloud: actual HEX input text remains readable
+PASS Mint Sorbet: selection persists
+PASS Mint Sorbet: palette reaches actual window resources
+PASS Mint Sorbet: actual HEX input text remains readable
+PASS Rosewater: selection persists
+PASS Rosewater: palette reaches actual window resources
+PASS Rosewater: actual HEX input text remains readable
+PASS Cyber Lime: selection persists
+PASS Cyber Lime: palette reaches actual window resources
+PASS Cyber Lime: actual HEX input text remains readable
+PASS Neon Arcade: selection persists
+PASS Neon Arcade: palette reaches actual window resources
+PASS Neon Arcade: actual HEX input text remains readable
+PASS Neon Arcade: synthetic collection card renders without network access
+PASS Custom accent preserves its light/pastel base palette
+PASS Named custom theme stores the full base palette
+PASS Named custom theme restores its pastel palette after a neon selection
+PASS Custom palette survives a fresh window load
+PASS Discovery shows offline cached offers with claims disabled
+PASS Actual window groups refreshed provider routes together
+PASS Refresh preserves per-provider flags without cross-provider collisions
+PASS Unambiguous legacy provider IDs migrate without losing flags
+PASS One provider outage preserves its disabled cache beside healthy live sources
+PASS Source-health panel shows both failures and last-success times
+PASS Successful empty provider refresh clears stale discovery results
+PASS Empty refresh preserves personal library as unclaimable saved records
+PASS Backup and transfer settings are wired into the actual window
+PASS Ambiguous legacy hash collision never guesses which native route owns the saved flag
+PASS Compact status/tracking buttons all have accessible action names
+PASS Headless pointer reaches the compact hover target
+PASS Rendered hover glyph keeps readable contrast against its accent background
+PASS Actual address hover binding shows the destination
+PASS Actual price icon updates when verified evidence arrives
+PASS Open price hover popup and warning icon update together when evidence rejects the offer
+PASS Verbose provider health starts collapsed
+PASS Provider health can be pinned with a keyboard-accessible button
+PASS Clicking an icon opens local details without another feed/browser request
+PASS Open details prevents keyboard interaction with covered controls
+PASS Details contains region, full destination and actual provider/address times
+PASS Escape closes details and restores background interaction
+PASS Visible Details and Close buttons work without hover
+PASS F1 opens highlighted Help and closes offer details
+PASS Help search filters real topic controls
+PASS Unmatched help queries show a useful empty state
+PASS Refresh closes details before replacing offers
+PASS Help remains available at the minimum supported window size
+Completed 316 security regression checks. No app launched, real links fetched, or startup registry changed.

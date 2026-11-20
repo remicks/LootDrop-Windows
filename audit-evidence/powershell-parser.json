@@ -1,0 +1,10 @@
+[
+  {
+    "File": "Build-Tester-Releases.ps1",
+    "Errors": 0
+  },
+  {
+    "File": "Build-Windows.ps1",
+    "Errors": 0
+  }
+]

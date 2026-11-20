@@ -1,0 +1,2 @@
+Bundled runtime: runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.14
+No Avalonia DiagnosticsSupport in Release dependency graph

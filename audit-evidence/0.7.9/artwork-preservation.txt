@@ -1,0 +1,1 @@
+All 93 original artwork files retain their reference-inventory SHA256 hashes.

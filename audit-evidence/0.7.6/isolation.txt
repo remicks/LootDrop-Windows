@@ -1,0 +1,1 @@
+PASS: iOS source/data-independent files match pre-task hashes. Beta paths were not opened or modified. Tests used synthetic libraries; no real library or startup registration was changed.

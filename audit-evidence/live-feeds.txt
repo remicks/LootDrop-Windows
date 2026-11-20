@@ -1,0 +1,52 @@
+PASS URL blocked: http://store.epicgames.com/p/a
+PASS URL blocked: file:///C:/test.exe
+PASS URL blocked: javascript:alert(1)
+PASS URL blocked: steam://run/123
+PASS URL blocked: https://user:password@store.epicgames.com/a
+PASS URL blocked: https://localhost/a
+PASS URL blocked: https://127.0.0.1/a
+PASS URL blocked: https://[::1]/
+PASS URL blocked: https://169.254.169.254/
+PASS URL blocked: https://192.168.1.1/
+PASS URL blocked: https://store.epicgames.com:444/a
+PASS URL blocked: https://server.internal/a
+PASS URL blocked: https://server.local/a
+PASS URL blocked: https://store.epicgames.com/Injected
+PASS URL blocked: https://store.epicgames.com\@evil.com/
+PASS Direct HTTPS store supported
+PASS Independent HTTPS store remains manually usable
+PASS Unknown automatic image host blocked
+PASS Image suffix spoof blocked
+PASS Known image CDN supported
+PASS Domain substring spoof rejected
+PASS Unsafe claim check rejected without fetching
+PASS Safe claim remains unverified without fetching
+PASS Claim cancellation honored
+PASS Exact HTTP size boundary accepted
+PASS Declared oversized HTTP body blocked
+PASS Streaming oversized HTTP body blocked without Content-Length
+PASS Redirect response not consumed as success
+PASS Streaming body cancellation enforced
+PASS Steam URL embedded in attacker path cannot verify
+PASS Epic platform label cannot verify unrelated URL
+PASS Model blocks unsafe claim before background checks
+PASS Encoded image size enforced
+PASS Invalid image rejected
+PASS UNC wallpaper blocked before file access
+PASS Wallpaper outside managed folder rejected
+PASS Valid PNG header accepted
+PASS Excessive image width rejected before Bitmap decode
+PASS Missing library loads defaults
+PASS Library round-trip preserves games
+PASS Atomic write leaves no temporary file
+PASS Corrupt library reported
+PASS Corrupt library cannot be overwritten by autosave
+PASS Original corrupt data preserved
+PASS Null library collection rejected
+PASS Library values that could overflow statistics rejected
+PASS Oversized library titles rejected before regex statistics
+PASS Oversized local library rejected
+Completed 48 security regression checks. No app launched, real links fetched, or startup registry changed.
+LIVE GamerPower: parsed 30 offers (not checkout verification)
+LIVE Epic Games: parsed 1 offers (not checkout verification)
+LIVE CheapShark: parsed 14 offers (not checkout verification)

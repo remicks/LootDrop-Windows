@@ -1,0 +1,20 @@
+[
+  {
+    "InnerCompression": "true",
+    "Exe": 51197210,
+    "OptimalZip": 45615653,
+    "SmallestZip": 45401909,
+    "Installer": 45872825,
+    "ManagedAssemblySHA256": "C60522FBEB8E4DB44CB099A7349D4509FFBD47E66CF1845C0BD701E810F7DC4C",
+    "Run": "C:\\Users\\lostj\\Documents\\Codex\\2026-11-03\\referenced-chatgpt-conversation-this-is-an\\work\\package-size-481f0b61d1f64188ba829973f888b4aa\\true"
+  },
+  {
+    "InnerCompression": "false",
+    "Exe": 105230414,
+    "OptimalZip": 46819844,
+    "SmallestZip": 45200953,
+    "Installer": 35278543,
+    "ManagedAssemblySHA256": "C60522FBEB8E4DB44CB099A7349D4509FFBD47E66CF1845C0BD701E810F7DC4C",
+    "Run": "C:\\Users\\lostj\\Documents\\Codex\\2026-11-03\\referenced-chatgpt-conversation-this-is-an\\work\\package-size-481f0b61d1f64188ba829973f888b4aa\\false"
+  }
+]

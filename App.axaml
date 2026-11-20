@@ -1,0 +1,30 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="LootDrop.App"
+             xmlns:local="using:LootDrop"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <TrayIcon.Icons>
+        <TrayIcons>
+            <TrayIcon Icon="/Assets/lootdrop-purple.ico" ToolTipText="LootDrop — Free Game Hunter" Clicked="TrayShow_Click">
+                <TrayIcon.Menu>
+                    <NativeMenu>
+                        <NativeMenuItem Header="Show LootDrop" Click="TrayShow_Click"/>
+                        <NativeMenuItem Header="Settings" Click="TraySettings_Click"/>
+                        <NativeMenuItemSeparator/>
+                        <NativeMenuItem Header="Exit LootDrop" Click="TrayExit_Click"/>
+                    </NativeMenu>
+                </TrayIcon.Menu>
+            </TrayIcon>
+        </TrayIcons>
+    </TrayIcon.Icons>
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+</Application>

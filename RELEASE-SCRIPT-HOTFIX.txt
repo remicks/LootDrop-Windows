@@ -1,0 +1,4 @@
+This legacy hotfix notice is superseded by the version 2 security update.
+Read BUILD-FOR-TESTERS.md and SECURITY-AUDIT.md.
+Use Build-Tester-Releases.ps1 to perform a fresh, locked, audited publish.
+SkipPublish and direct compilation of stale publish output are no longer supported.

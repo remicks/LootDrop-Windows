@@ -1,0 +1,27 @@
+{
+  "FileVersion": "0.7.4.2",
+  "PortableVerification": "Single executable, fully read and SHA256 matches fresh publish",
+  "Artifacts": [
+    {
+      "Name": "LootDrop-Portable-win-x64.zip",
+      "Length": 46278026,
+      "SHA256": "C97253FC53650826D1164923D600F52082E6DAF3514C346D1B5F33D35C251254"
+    },
+    {
+      "Name": "LootDrop-Setup.exe",
+      "Length": 45893469,
+      "SHA256": "6EFCFDF8749F8A39DB96016D9C64B80B91698162671CF8183BBD952F7DAACD80"
+    }
+  ],
+  "Authenticode": [
+    {
+      "Name": "LootDrop-Setup.exe",
+      "Status": "NotSigned"
+    },
+    {
+      "Name": "publish\\LootDrop.exe",
+      "Status": "NotSigned"
+    }
+  ],
+  "InstalledOrLaunched": false
+}

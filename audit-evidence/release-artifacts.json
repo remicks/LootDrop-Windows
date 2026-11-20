@@ -1,0 +1,33 @@
+{
+  "BuildFolder": "v2-20261103-211327-ff7cccb7",
+  "PortableEntries": [
+    {
+      "Name": "LootDrop.exe",
+      "Length": 51959070
+    }
+  ],
+  "Artifacts": [
+    {
+      "Name": "LootDrop-Portable-win-x64.zip",
+      "Length": 46274428,
+      "SHA256": "781424EB77A8EF799296A632A601835DCC63F5B214BFAA0F8530A50B5AD1A46C"
+    },
+    {
+      "Name": "LootDrop-Setup.exe",
+      "Length": 45891466,
+      "SHA256": "7BBA768A42A75388D924F43A43A26726C1B6D71D8508FD12016FD765469B0F5E"
+    }
+  ],
+  "Authenticode": [
+    {
+      "Name": "LootDrop-Setup.exe",
+      "Status": "NotSigned"
+    },
+    {
+      "Name": "publish\\LootDrop.exe",
+      "Status": "NotSigned"
+    }
+  ],
+  "ArchiveRead": "All portable entries read successfully; bundled executable hash matches publish output",
+  "ExecutedOrInstalled": false
+}

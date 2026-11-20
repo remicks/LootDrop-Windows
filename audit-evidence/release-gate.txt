@@ -1,0 +1,2 @@
+PASS: Simulated restore exit 42 stopped release before publishing. Locked restore / vulnerability audit failed. No release created.
+PASS: SkipPublish rejected by parameter binding.

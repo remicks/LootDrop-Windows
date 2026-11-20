@@ -1,0 +1,31 @@
+Pattern: Process\.Start
+Views\MainWindow.axaml.cs:1155
+Views\MainWindow.axaml.cs:1181
+Views\MainWindow.axaml.cs:1187
+Views\MainWindow.StoreSignIn.cs:14
+Pattern: SafeHttp.GetBytesAsync
+Services\AdditionalGiveawayService.cs:30
+Services\AdditionalGiveawayService.cs:98
+Services\GamerPowerService.cs:32
+Services\StoreVerificationService.cs:68
+Services\StoreVerificationService.cs:115
+Views\MainWindow.axaml.cs:523
+Pattern: UseCookies|UseDefaultCredentials|AllowAutoRedirect
+Services\SafeHttp.cs:14
+Pattern: PasswordVault|CredentialManager|CookieContainer|WebView|WebBrowser|DllImport|Assembly\.Load|BinaryFormatter|XamlReader|ServerCertificateCustomValidationCallback|DownloadFile|cmd\.exe|powershell\.exe
+Pattern: https://
+Services\AdditionalGiveawayService.cs:30
+Services\AdditionalGiveawayService.cs:65
+Services\AdditionalGiveawayService.cs:98
+Services\AdditionalGiveawayService.cs:110
+Services\GamerPowerService.cs:33
+Services\StoreSignInShortcuts.cs:14
+Services\StoreSignInShortcuts.cs:15
+Services\StoreSignInShortcuts.cs:16
+Services\StoreSignInShortcuts.cs:17
+Services\StoreSignInShortcuts.cs:18
+Services\StoreVerificationService.cs:68
+Services\StoreVerificationService.cs:115
+Views\MainWindow.axaml:2
+Views\MainWindow.axaml.cs:1181
+Views\MainWindow.axaml.cs:1187

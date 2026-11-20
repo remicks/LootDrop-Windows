@@ -1,0 +1,4 @@
+Antivirus status unavailable: The 'Get-MpComputerStatus' command was found in the module 'ConfigDefender', but the module could not be loaded due to the following error: [Windows PowerShell remoting features are not enabled or not supported on this machine.
+This may be because you do not have the correct version of WS-Management installed or this version of Windows does not support remoting currently.
+ For more information, type 'get-help about_remote_requirements'.]
+For more information, run 'Import-Module ConfigDefender'.
