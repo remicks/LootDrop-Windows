@@ -72,7 +72,7 @@ public partial class MainWindow : Window
     public MainWindow() : this(new LocalLibraryService(), enableBackgroundWork: true) { }
 
     // An isolated store and disabled background work allow safe headless UI validation.
-    public MainWindow(LocalLibraryService library, bool enableBackgroundWork, IReadOnlyList<FeedProvider>? providers = null)
+    public MainWindow(LocalLibraryService library, bool enableBackgroundWork, IReadOnlyList<FeedProvider>? providers = null, UpdateService? updateService = null)
     {
         _library = library;
         _cache = new FeedCacheService(library.DataDirectory);
@@ -84,6 +84,7 @@ public partial class MainWindow : Window
         };
         InitializeComponent();
         InitializeOfferInterface();
+        _updateService = updateService ?? new UpdateService(); InitializeUpdates();
         OffersList.ItemsSource = VisibleGroups;
         sidebarLabels[NavDiscover] = ("⌕", "Discover Games");
         sidebarLabels[NavWishlist] = ("♡", "My Wishlist");
@@ -1188,5 +1189,6 @@ public partial class MainWindow : Window
         catch (Exception ex) { StatusText.Text = $"Could not open GamerPower.com: {ex.Message}"; }
     }
 }
+
 
 

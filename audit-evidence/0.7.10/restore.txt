@@ -1,0 +1,3 @@
+  Determining projects to restore...
+  Restored C:\Users\lostj\Documents\ChatGPT\Lootdrop\work\LootDrop-Windows\SecurityChecks\SecurityChecks.csproj (in 818 ms).
+  Restored C:\Users\lostj\Documents\ChatGPT\Lootdrop\work\LootDrop-Windows\LootDrop.csproj (in 818 ms).

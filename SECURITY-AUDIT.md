@@ -1,3 +1,5 @@
+Update/download security and validation: [0.7.10](RELEASE-0.7.10.md).
+
 Current expanded review: [Windows v2 0.7.8](SECURITY-REVIEW-0.7.8.md). Historical findings/results follow.
 
 # LootDrop version 2 b15 — security hardening review
@@ -93,4 +95,5 @@ The build script creates a fresh `dist\v2-<timestamp>-<random>` folder. It does 
 - Avalonia scaled image decode: https://reference.avaloniaui.net/api/Avalonia.Media.Imaging/Bitmap/F815A524
 
 These references explain mechanisms, not the safety of this application. Actual project validation is recorded separately.
+
 

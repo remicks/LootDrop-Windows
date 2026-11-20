@@ -101,7 +101,8 @@ internal static class ThemeChecks
         check(restored.Resources["AppBackgroundBrush"] is SolidColorBrush restoredBrush && restoredBrush.Color == Color.Parse(ThemeCatalog.Presets["Mint Sorbet"].Background), "Custom palette survives a fresh window load");
         restored.AllowExit(); restored.Close();
         ReliabilityChecks.RunWindow(check, temporaryRoot, screenshots);
-        OfferInterfaceChecks.RunWindow(check, temporaryRoot, screenshots); StoreSignInChecks.Run(check, temporaryRoot, screenshots);
+        OfferInterfaceChecks.RunWindow(check, temporaryRoot, screenshots); StoreSignInChecks.Run(check, temporaryRoot, screenshots); UpdateChecks.RunWindow(check, temporaryRoot, screenshots);
     }
 }
+
 

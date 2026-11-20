@@ -628,6 +628,20 @@
                             <TextBlock x:Name="LibraryTransferStatus" Classes="muted" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Border>
+                    <Border x:Name="UpdatesPanel" Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="APP UPDATES" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <TextBlock x:Name="InstalledVersionText"/>
+                            <TextBlock Text="Check public releases from remicks/LootDrop-Windows on GitHub. Checks happen only when you click. GitHub receives your network address; no store credentials or collection data are sent." TextWrapping="Wrap" Classes="muted"/>
+                            <CheckBox x:Name="IncludePrereleasesCheck" Content="Include tester prereleases" ToolTip.Tip="Off by default. Tester builds may be unsigned and are not ready for general release."/>
+                            <WrapPanel><Button x:Name="CheckUpdatesButton" Content="Check for updates" Click="CheckUpdates_Click"/><Button x:Name="CancelUpdateButton" Content="Cancel" IsEnabled="False" Click="CancelUpdate_Click"/><Button x:Name="ReleaseNotesButton" Content="View release on GitHub ↗" IsEnabled="False" Click="UpdateReleaseNotes_Click"/></WrapPanel>
+                            <TextBlock x:Name="UpdateStatusText" Text="No update check performed this session." TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"/>
+                            <ComboBox x:Name="UpdatePackages" HorizontalAlignment="Stretch" PlaceholderText="Available installer or portable package" AutomationProperties.Name="Update package"/>
+                            <Button x:Name="DownloadUpdateButton" Content="Download unsigned package…" IsEnabled="False" HorizontalAlignment="Left" Click="DownloadUpdate_Click"/>
+                            <TextBlock Text="Unsigned test builds: a matching SHA256 confirms the download matches GitHub metadata, not that it is safe or signed. Downloads are never launched or installed automatically. Keep Windows security protection enabled." TextWrapping="Wrap" Classes="muted"/>
+                            <Expander Header="Release notes" HorizontalAlignment="Stretch"><ScrollViewer MaxHeight="240"><TextBlock x:Name="UpdateNotesText" Margin="12" TextWrapping="Wrap"/></ScrollViewer></Expander>
+                        </StackPanel>
+                    </Border>
                     <!-- Read-only About section: credits and links will be populated in a future release. -->
                     <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
                         <StackPanel Spacing="12">
@@ -706,7 +720,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                     <TextBlock x:Name="HelpEmptyText" Text="No matching topics. Try a shorter search." IsVisible="False" Classes="muted"/>
-                    <TextBlock Text="LootDrop version 2 · Windows · 0.7.9" Classes="muted"/>
+                    <TextBlock Text="LootDrop version 2 · Windows · 0.7.10" Classes="muted"/>
                 </StackPanel>
             </ScrollViewer>
             <ScrollViewer x:Name="ThemesScroll" Grid.Row="0"
@@ -945,6 +959,8 @@
     </Grid>
 
 </Window>
+
+
 
 
 

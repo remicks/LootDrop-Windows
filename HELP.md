@@ -68,6 +68,13 @@ F1 opens Help. Tab and Shift+Tab move between controls; Enter/Space activate but
 LootDrop never collects, stores or transmits your store passwords, cookies or sign-in tokens. Sign-in happens in your default browser, which sends your credentials securely over the internet to the store or its chosen identity provider. Remembered sessions and saved passwords are managed by your browser/store, not LootDrop; browser sync may copy them to your browser account if enabled.
 Use the same browser profile when opening offers. Choose the store's Remember me option on a trusted personal computer. Private browsing, session expiry and security checks can require another login. LootDrop cannot detect whether you are signed in, bypass two-factor authentication or claim games automatically. Check the final address before entering credentials. To sign out, use the store website; manage saved passwords and sync in your browser settings.
 
+## Checking and downloading app updates
+
+Open Settings and find App updates. Choose Check for updates. Nothing is checked automatically. Enable Include tester prereleases only if you want test builds; the setting starts off each session.
+If a newer supported release exists, read its notes, select the installer or portable ZIP, then choose Download unsigned package and a local folder. Existing files are not overwritten; use another folder if necessary. Cancel stops the transfer.
+The package is saved only after its size and SHA256 match GitHub metadata. A checksum is not a publisher signature or a safety certification. Nothing is launched or installed automatically. Back up your library and close LootDrop before manually updating. Keep antivirus/SmartScreen enabled.
+GitHub receives your network address for checks/downloads; no store credentials or collection data are sent. A GitHub error is shown as a failed check, not a claim that you are up-to-date. Only supported numeric version tags among the 100 recent published releases are considered. The release page remains available if packages are missing or unsupported.
+
 ## Privacy and safe testing
 
 Collection data, cache, themes and backups stay under the version 2 LootDrop local-data folder. The iOS fork and beta have separate projects/data. There is no store login, password storage, cloud sync, automatic claim or diagnostic upload.

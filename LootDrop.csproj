@@ -3,7 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-    <Version>0.7.9</Version><Company>Degenerates Inc.</Company><Authors>Degenerates Inc.</Authors>
+    <Version>0.7.10</Version><Company>Degenerates Inc.</Company><Authors>Degenerates Inc.</Authors>
     <NuGetLockFilePath>packages.$(Configuration).lock.json</NuGetLockFilePath>
     <Nullable>enable</Nullable>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
@@ -34,6 +34,7 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
   </ItemGroup>
 </Project>
+
 
 
 
