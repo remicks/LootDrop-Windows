@@ -106,6 +106,9 @@ ThemeChecks.Run(Check, temp, args.Contains("--theme-screenshots"));
 // All fixtures are under this harness's own build directory; no real app data is used.
 Console.WriteLine($"Completed {checks} security regression checks. No app launched, real links fetched, or startup registry changed.");
 
+var iconPathIndex = Array.IndexOf(args,"--verify-published-icons");
+if(iconPathIndex>=0) AppIconChecks.VerifyNative(Check,args[iconPathIndex+1]);
+
 if (args.Contains("--live-updates")) await Task.Run(UpdateChecks.RunLive).ConfigureAwait(false);
 
 if (args.Contains("--live-feeds"))
@@ -177,6 +180,7 @@ sealed class FixtureStream(bool stall) : Stream
     public override void SetLength(long value) => throw new NotSupportedException();
     public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
 }
+
 
 
 

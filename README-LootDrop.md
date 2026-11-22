@@ -1,6 +1,6 @@
-# LootDrop version 2 — offer details and Help (0.7.10)
+# LootDrop version 2 — offer details and Help (0.7.11)
 
-New: compact hover/click status icons, a full offer-details drawer, a cleaner dashboard and searchable Help (sidebar or F1). See [current release validation](RELEASE-0.7.10.md) and [plain-language help](HELP.md). Offline caching, backups, collision-safe identities, 18 themes and the smaller 0.7.5 package configuration are retained.
+New: compact hover/click status icons, a full offer-details drawer, a cleaner dashboard and searchable Help (sidebar or F1). See [current release validation](RELEASE-0.7.11.md) and [plain-language help](HELP.md). Offline caching, backups, collision-safe identities, 18 themes and the smaller 0.7.5 package configuration are retained.
 
 New: per-source offline cache/health, reviewed library export/import/restore, daily local snapshots, and native-provider-ID duplicate handling. See [release notes and validation](RELEASE-0.7.5.md). The Windows release build script requires PowerShell 7.2+ (`pwsh`). All 18 theme presets remain available.
 
@@ -53,5 +53,6 @@ Local JSON is not encrypted and is not a credential store. This package does not
 
 
 
-Subtle company branding: see RELEASE-0.7.10.md and Assets/Branding/PROVENANCE.md.
+Subtle company branding: see RELEASE-0.7.11.md and Assets/Branding/PROVENANCE.md.
+
 

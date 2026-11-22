@@ -75,6 +75,13 @@ If a newer supported release exists, read its notes, select the installer or por
 The package is saved only after its size and SHA256 match GitHub metadata. A checksum is not a publisher signature or a safety certification. Nothing is launched or installed automatically. Back up your library and close LootDrop before manually updating. Keep antivirus/SmartScreen enabled.
 GitHub receives your network address for checks/downloads; no store credentials or collection data are sent. A GitHub error is shown as a failed check, not a claim that you are up-to-date. Only supported numeric version tags among the 100 recent published releases are considered. The release page remains available if packages are missing or unsupported.
 
+## App icons and themed desktop shortcuts
+
+Themes > App icons contains Midnight Purple, Electric Blue, Neon Cyan, Emerald Green, Crimson Red, Sunset Orange, Hot Pink and Royal Gold. Choose one independently of the app theme, or keep Match app theme. Your choice is saved on this PC and is retained when you import a collection.
+The window and system-tray icons follow this choice. Windows may retain a pinned shortcut's own icon; choosing a running-app icon does not rewrite existing pins or shortcuts.
+In the installed or portable build, Create separate themed desktop shortcut makes a new color-named shortcut. Existing shortcuts are not overwritten. Moving a portable EXE can break a shortcut that points to its old location. Windows controls taskbar pinning; use the newly created shortcut to pin your chosen color.
+All eight colors are also available through a shortcut's Properties > Change Icon: browse to LootDrop.exe and select a variant. You do not need loose .ico files. The executable's default Explorer icon stays Purple. No registry or startup change is made.
+
 ## Privacy and safe testing
 
 Collection data, cache, themes and backups stay under the version 2 LootDrop local-data folder. The iOS fork and beta have separate projects/data. There is no store login, password storage, cloud sync, automatic claim or diagnostic upload.

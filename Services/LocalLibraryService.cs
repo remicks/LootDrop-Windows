@@ -47,6 +47,7 @@ public sealed class LocalLibraryService
 
     public static void Validate(LibraryState state)
     {
+            if (!AppIconCatalog.IsValid(state.AppIconKey)) throw new InvalidDataException("Unsupported app icon choice.");
             if (state.SelectedPlatforms == null || state.SelectedStores == null ||
                 state.SelectedPlatforms.Count > 32 || state.SelectedStores.Count > 32 ||
                 state.SelectedPlatforms.Any(s => s == null || s.Length > 128) ||
@@ -121,6 +122,7 @@ public sealed class LibraryState
     public bool CloseToTray { get; set; } = false;
     public bool StartWithWindows { get; set; } = false;
     public List<string> SelectedStores { get; set; } = new();
+    public string AppIconKey { get; set; } = "theme";
     public string ThemeName { get; set; } = "Purple";
     public string CustomAccentHex { get; set; } = "#A448F4";
     public string CustomThemeBasePreset { get; set; } = "Purple";
@@ -198,3 +200,4 @@ public sealed class SavedGame
         PriceEvidence = cached ? "Cached listing · Price unverified · Refresh before opening" : "Saved record · Refresh before opening"
     };
 }
+

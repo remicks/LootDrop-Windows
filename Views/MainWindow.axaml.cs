@@ -164,7 +164,7 @@ public partial class MainWindow : Window
             var state = _library.Load();
             foreach (var game in state.Games.Where(g => g.Id > 0 && (g.IsWishlisted || g.IsClaimed || g.IsReportedNotFree)))
                 _saved[OfferIdentity.Key(game)] = game;
-            themeName = state.ThemeName;
+            themeName = state.ThemeName; preferredIcon = state.AppIconKey;
             customAccentHex = state.CustomAccentHex;
             customThemeBasePreset = ThemeCatalog.Resolve(state.CustomThemeBasePreset).Name;
             if (state.CustomThemes != null)
@@ -204,6 +204,7 @@ public partial class MainWindow : Window
         {
             StatusText.Text = $"Saved library could not be read: {ex.Message}";
         }
+        InitializeIconChoices();
         _isReady = true;
         ApplyTheme(themeName, customAccentHex, save: false);
         RefreshSavedThemeList();
@@ -256,7 +257,7 @@ public partial class MainWindow : Window
                 StartWithWindows = startWithWindows,
                 SelectedStore = selectedStores.Count == 1 ? selectedStores.First() : "All",
                 SelectedStores = selectedStores.OrderBy(x => x).ToList(),
-                ThemeName = themeName,
+                ThemeName = themeName, AppIconKey = preferredIcon,
                 CustomAccentHex = customAccentHex,
                 CustomThemeBasePreset = customThemeBasePreset,
                 CustomThemes = customThemes.ToList(),
@@ -760,9 +761,8 @@ public partial class MainWindow : Window
             Resources[brush.Key] = new SolidColorBrush(Color.Parse(brush.Value));
         UpdateWallpaperOverlay();
 
-        var iconKey = isCustom ? ClosestIcon(color) : ThemePresets[name].Icon;
-        if (Application.Current is App app) app.SetThemeIcon(iconKey);
-        ThemeStatusText.Text = $"Active: {name} · Accent {hex.ToUpperInvariant()} · Matching {iconKey} icon";
+        var iconKey = ApplyResolvedIcon(isCustom ? ClosestIcon(color) : ThemePresets[name].Icon);
+        ThemeStatusText.Text = $"Active: {name} · Accent {hex.ToUpperInvariant()} · {iconKey} icon";
         ThemeErrorText.Text = "";
         CustomColorSwatch.Background = new SolidColorBrush(color);
         CustomHexBox.Text = hex.ToUpperInvariant();
@@ -786,7 +786,7 @@ public partial class MainWindow : Window
         var iconKey = themeName.Equals("Custom", StringComparison.OrdinalIgnoreCase) && TryHex(customAccentHex, out var col)
             ? ClosestIcon(col)
             : ThemePresets.TryGetValue(themeName, out var preset) ? preset.Icon : "purple";
-        if (Application.Current is App app) app.SetThemeIcon(iconKey);
+        ApplyResolvedIcon(iconKey);
     }
 
     private static string ClosestIcon(Color chosen)
@@ -1189,6 +1189,8 @@ public partial class MainWindow : Window
         catch (Exception ex) { StatusText.Text = $"Could not open GamerPower.com: {ex.Message}"; }
     }
 }
+
+
 
 
 

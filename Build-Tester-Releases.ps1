@@ -51,7 +51,7 @@ foreach ($symbols in Get-ChildItem -LiteralPath $publish -Filter '*.pdb' -File) 
 }
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'SECURITY-AUDIT.md') -Destination $run
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'SECURITY-RECHECK-2026-11-18.md') -Destination $run
-Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'RELEASE-0.7.10.md') -Destination $run
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'RELEASE-0.7.11.md') -Destination $run
 if ($Target -in @('All','Portable')) {
     $portable = Join-Path $run 'LootDrop-Portable-win-x64.zip'
     [IO.Compression.ZipFile]::CreateFromDirectory($publish, $portable, [IO.Compression.CompressionLevel]::SmallestSize, $false)
@@ -66,6 +66,7 @@ Get-ChildItem -LiteralPath $run -File | Where-Object Extension -in @('.exe','.zi
     Set-Content -LiteralPath (Join-Path $run 'SHA256SUMS.txt')
 Write-Host "Artifacts: $run"
 Write-Host 'Build completed. This is not distribution approval; follow SECURITY-AUDIT.md before sharing.'
+
 
 
 

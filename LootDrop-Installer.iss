@@ -4,7 +4,7 @@
 ; LootDrop Windows x64 per-user installer — Inno Setup 6
 ; Compile with Build-Tester-Releases.ps1 or open this file in Inno Setup.
 #define MyAppName "LootDrop"
-#define MyAppVersion "0.7.10"
+#define MyAppVersion "0.7.11"
 #define MyAppExeName "LootDrop.exe"
 
 [Setup]
@@ -45,6 +45,7 @@ Name: "{autodesktop}\LootDrop"; Filename: "{app}\{#MyAppExeName}"; Tasks: deskto
 Filename: "{app}\{#MyAppExeName}"; Description: "Launch LootDrop"; Flags: nowait postinstall skipifsilent
 
 ; User settings and saved game library are intentionally retained after uninstall.
+
 
 
 

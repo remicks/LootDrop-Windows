@@ -720,7 +720,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                     <TextBlock x:Name="HelpEmptyText" Text="No matching topics. Try a shorter search." IsVisible="False" Classes="muted"/>
-                    <TextBlock Text="LootDrop version 2 · Windows · 0.7.10" Classes="muted"/>
+                    <TextBlock Text="LootDrop version 2 · Windows · 0.7.11" Classes="muted"/>
                 </StackPanel>
             </ScrollViewer>
             <ScrollViewer x:Name="ThemesScroll" Grid.Row="0"
@@ -728,8 +728,22 @@
                 <StackPanel Margin="25" Spacing="18" MaxWidth="820" HorizontalAlignment="Left">
                     <TextBlock Text="APPEARANCE" Foreground="{DynamicResource AccentBrightBrush}" FontSize="11" FontWeight="Bold"/>
                     <TextBlock Text="Themes" Classes="heading"/>
-                    <TextBlock Text="Choose a preset. Each combination coordinates backgrounds, text and accents; window and tray icons use a matching color. Custom accent colors use the nearest preset icon color."
+                    <TextBlock Text="Choose a preset for coordinated colors. App icons match the theme by default, or you can choose a separate icon below."
                                Classes="muted" TextWrapping="Wrap"/>
+                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="APP ICONS · EIGHT EMBEDDED COLORS" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <Grid ColumnDefinitions="48,*" ColumnSpacing="14">
+                                <Image x:Name="SelectedIconPreview" Width="40" Height="40" RenderOptions.BitmapInterpolationMode="HighQuality" AutomationProperties.Name="Selected application icon"/>
+                                <ComboBox x:Name="AppIconBox" Grid.Column="1" SelectionChanged="AppIcon_Changed" HorizontalAlignment="Stretch" AutomationProperties.Name="Application icon color">
+                                    <ComboBox.ItemTemplate><DataTemplate x:DataType="services:AppIconChoice"><StackPanel Orientation="Horizontal" Spacing="10"><Image Source="{Binding Preview}" Width="24" Height="24"/><TextBlock Text="{Binding Label}" VerticalAlignment="Center"/></StackPanel></DataTemplate></ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </Grid>
+                            <TextBlock Text="Choose an icon independently of the app colors, or keep Match app theme. All eight are inside LootDrop.exe and available in Windows’ Change Icon dialog." Classes="muted" TextWrapping="Wrap"/>
+                            <Button x:Name="CreateIconShortcutButton" Content="Create separate themed desktop shortcut" Click="CreateIconShortcut_Click" HorizontalAlignment="Left" ToolTip.Tip="Creates a new named shortcut using this EXE’s selected icon. Existing shortcuts and taskbar pins are not edited. Available in installed/portable builds."/>
+                            <TextBlock x:Name="AppIconStatus" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"/>
+                        </StackPanel>
+                    </Border>
                     <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
                         <StackPanel Spacing="12">
                             <TextBlock Text="PRESET THEMES" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
@@ -959,6 +973,9 @@
     </Grid>
 
 </Window>
+
+
+
 
 
 

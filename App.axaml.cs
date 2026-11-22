@@ -14,7 +14,7 @@ public partial class App : Application
 {
     private MainWindow? _window;
 
-    public void SetThemeIcon(string themeKey)
+    public void SetThemeIcon(string themeKey, Window? window = null)
     {
         var normalized = themeKey.ToLowerInvariant();
         if (normalized is not ("purple" or "blue" or "cyan" or "green" or "red" or "orange" or "pink" or "gold"))
@@ -24,7 +24,7 @@ public partial class App : Application
             var iconUri = new Uri($"avares://LootDrop/Assets/lootdrop-{normalized}.ico");
             using var stream = AssetLoader.Open(iconUri);
             var icon = new WindowIcon(stream);
-            if (_window != null) _window.Icon = icon;
+            if (window != null) window.Icon = icon; else if (_window != null) _window.Icon = icon;
             var trayIcons = TrayIcon.GetIcons(this);
             if (trayIcons != null)
                 foreach (var tray in trayIcons) tray.Icon = icon;
@@ -57,3 +57,4 @@ public partial class App : Application
         }
     }
 }
+
