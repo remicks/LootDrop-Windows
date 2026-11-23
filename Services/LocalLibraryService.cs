@@ -47,6 +47,10 @@ public sealed class LocalLibraryService
 
     public static void Validate(LibraryState state)
     {
+            if (state.DesktopDockWidth is not (360 or 400 or 480 or 560) ||
+                state.DesktopDockMonitor == null || state.DesktopDockMonitor.Length > 32 ||
+                state.DesktopDockMonitor.Any(char.IsControl))
+                throw new InvalidDataException("Unsupported desktop docking preferences.");
             if (!AppIconCatalog.IsValid(state.AppIconKey)) throw new InvalidDataException("Unsupported app icon choice.");
             if (state.SelectedPlatforms == null || state.SelectedStores == null ||
                 state.SelectedPlatforms.Count > 32 || state.SelectedStores.Count > 32 ||
@@ -130,6 +134,11 @@ public sealed class LibraryState
     public string ThemeBackgroundPath { get; set; } = "";
     public bool SidebarCollapsed { get; set; } = false;
     public bool SidebarRight { get; set; } = false;
+    // Device-only preferences; imports never enable or change desktop docking.
+    public bool DesktopDockEnabled { get; set; } = false;
+    public bool DesktopDockRight { get; set; } = true;
+    public string DesktopDockMonitor { get; set; } = "";
+    public int DesktopDockWidth { get; set; } = 400;
     public int WindowOpacityPercent { get; set; } = 100;
     public int WallpaperDimPercent { get; set; } = 72;
     public bool LowGraphicsMode { get; set; } = false;

@@ -82,6 +82,13 @@ The window and system-tray icons follow this choice. Windows may retain a pinned
 In the installed or portable build, Create separate themed desktop shortcut makes a new color-named shortcut. Existing shortcuts are not overwritten. Moving a portable EXE can break a shortcut that points to its old location. Windows controls taskbar pinning; use the newly created shortcut to pin your chosen color.
 All eight colors are also available through a shortcut's Properties > Change Icon: browse to LootDrop.exe and select a variant. You do not need loose .ico files. The executable's default Explorer icon stays Purple. No registry or startup change is made.
 
+## Desktop sidebar mode: reserved screen space
+
+Settings > Desktop sidebar mode pins LootDrop to the left or right edge and asks Windows to reserve that strip of your selected display. Other maximized apps use the remaining work area. Ordinary windows remain movable, and fullscreen games or Windows system screens can cover the sidebar. This is not a security boundary.
+Choose Current display to capture the display LootDrop is on when docking starts, or choose a specific display. Width choices use logical pixels and may be reduced to leave room for other apps. If the display is unplugged, the primary display is used; if it is too small, docking turns off safely.
+Use the page menu at the top for Discover, collections, Settings, Themes and Help. Platforms & stores expands the filters. The arrow button returns to the normal window; the dash hides to tray. Hiding, minimizing or exiting releases the reservation. Restoring from tray reserves space again if enabled. Docking remembers your preference on this PC; importing a collection cannot enable it.
+No administrator access, new network requests or Windows security changes are needed. Explorer restarts and display/DPI changes trigger a fresh position negotiation. If negotiation fails, LootDrop releases its reservation and returns to a normal window.
+
 ## Privacy and safe testing
 
 Collection data, cache, themes and backups stay under the version 2 LootDrop local-data folder. The iOS fork and beta have separate projects/data. There is no store login, password storage, cloud sync, automatic claim or diagnostic upload.

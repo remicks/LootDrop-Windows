@@ -48,6 +48,7 @@ public partial class MainWindow : Window
     private bool closeToTray;
     private bool startWithWindows;
     private bool allowExit;
+    private bool trayLaunchHandled;
     private readonly bool launchHidden = Environment.GetCommandLineArgs()
         .Any(a => a.Equals("--tray", StringComparison.OrdinalIgnoreCase));
     private readonly HashSet<string> selectedStores = new(StringComparer.OrdinalIgnoreCase);
@@ -84,6 +85,7 @@ public partial class MainWindow : Window
         };
         InitializeComponent();
         InitializeOfferInterface();
+        InitializeDesktopDock();
         _updateService = updateService ?? new UpdateService(); InitializeUpdates();
         OffersList.ItemsSource = VisibleGroups;
         sidebarLabels[NavDiscover] = ("⌕", "Discover Games");
@@ -156,8 +158,11 @@ public partial class MainWindow : Window
         };
         Opened += (_, _) =>
         {
-            if (launchHidden)
+            if (launchHidden && !trayLaunchHandled)
+            {
+                trayLaunchHandled = true;
                 Dispatcher.UIThread.Post(HideToTray, DispatcherPriority.Loaded);
+            }
         };
         try
         {
@@ -172,6 +177,8 @@ public partial class MainWindow : Window
             backgroundImagePath = state.ThemeBackgroundPath ?? "";
             sidebarCollapsed = state.SidebarCollapsed;
             sidebarRight = state.SidebarRight;
+            _dockEnabled = state.DesktopDockEnabled; _dockRight = state.DesktopDockRight;
+            _dockMonitor = state.DesktopDockMonitor; _dockWidth = state.DesktopDockWidth;
             windowOpacityPercent = Math.Clamp(state.WindowOpacityPercent, 65, 100);
             wallpaperDimPercent = Math.Clamp(state.WallpaperDimPercent, 0, 95);
             lowGraphicsMode = state.LowGraphicsMode;
@@ -245,6 +252,8 @@ public partial class MainWindow : Window
                 Games = _saved.Values.OrderBy(g => g.Id).ToList(),
                 SidebarCollapsed = sidebarCollapsed,
                 SidebarRight = sidebarRight,
+                DesktopDockEnabled = _dockEnabled, DesktopDockRight = _dockRight,
+                DesktopDockMonitor = _dockMonitor, DesktopDockWidth = _dockWidth,
                 WindowOpacityPercent = windowOpacityPercent,
                 WallpaperDimPercent = wallpaperDimPercent,
                 LowGraphicsMode = lowGraphicsMode,
@@ -711,6 +720,7 @@ public partial class MainWindow : Window
 
     private void HideToTray()
     {
+        _desktopDock?.Suspend();
         ShowInTaskbar = false;
         Hide();
     }
@@ -969,6 +979,7 @@ public partial class MainWindow : Window
 
     private void ApplySidebarLayout()
     {
+        if (_dockAppearance) return;
         const int compactWidth = 76;
         const int expandedWidth = 220;
         var width = sidebarCollapsed ? compactWidth : expandedWidth;
@@ -1120,6 +1131,7 @@ public partial class MainWindow : Window
     {
         CloseOfferDetails();
         currentSection = section;
+        UpdateDockNavigation();
         var settingsPage = section == "settings";
         var themesPage = section == "themes";
         var helpPage = section == "help"; var signInPage = section == "signin"; StoreSignInScroll.IsVisible = signInPage;

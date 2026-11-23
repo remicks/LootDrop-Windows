@@ -20,3 +20,8 @@ Packages are self-contained, single-file, compressed, without ReadyToRun or aggr
 Build-Windows.ps1 delegates to the same audited Portable path. The installer definition requires the fresh publish directory passed by Build-Tester-Releases.ps1. Stale-output/SkipPublish and standalone GUI compilation paths have been removed.
 
 Successful build output is not approval to distribute. Check the audit evidence and complete GUI, install/update/uninstall, startup and clean-machine validation in an isolated Windows account/VM before outside testing. Do not disable antivirus or SmartScreen. Signing and independent runtime/native-library checks remain the maintainer's responsibility.
+
+
+## GitHub and Discord delivery
+
+Every published build, including tester prereleases, must receive a Discord release announcement after all uploads finish, with all mention categories disabled. Follow [the publication policy](DISCORD-RELEASES.md): upload every artifact to a draft, publish last, and verify the announcement workflow reports successful delivery before reporting publication complete. Local package creation alone does not publish or announce a release.

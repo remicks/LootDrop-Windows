@@ -2,6 +2,10 @@
 
 The GitHub workflow `.github/workflows/discord-release.yml` announces completed LootDrop Windows releases to the channel selected by the repository's `DISCORD_WEBHOOK_URL` Actions secret. It includes both public releases and tester prereleases. Nothing is added to the desktop application, and the webhook is never included in the EXE, source code, release assets or logs.
 
+## Publication policy
+
+Every build published as a GitHub Release must be announced in Discord, including every unsigned/tester prerelease. Do not treat a local package as a completed published delivery. Upload all artifacts to a draft, publish it last, then verify the announcement job succeeded. Everyone, role and user pings remain disabled. Drafts are not published builds and must not announce unfinished uploads. If a future publisher uses GITHUB_TOKEN, it must explicitly dispatch the notifier after publication because that token may suppress the release-triggered workflow. Check for an existing successful announcement before retrying to avoid duplicate posts.
+
 ## Normal publishing
 
 1. Create a **draft** release with a supported numeric tag such as `v0.7.12`.

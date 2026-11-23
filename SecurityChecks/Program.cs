@@ -3,6 +3,7 @@ using LootDrop.Services;
 using LootDrop.Models;
 using SkiaSharp;
 
+if (args.Contains("--native-sidebar")) { NativeDockChecks.Run(); return; }
 var checks = 0;
 void Check(bool value, string name)
 {
@@ -99,6 +100,7 @@ Throws(() => themeLibrary.Save(safeState), "Invalid custom theme cannot be saved
 Check(beforeInvalidSave.SequenceEqual(File.ReadAllBytes(Path.Combine(temp, "theme-storage", "library.json"))), "Invalid theme save leaves original file unchanged");
 File.WriteAllText(libraryPath, "{\"CustomThemes\":[{\"Name\":\"Broken\",\"Hex\":null}]}");
 Throws(() => new LocalLibraryService(temp).Load(), "Null custom theme color rejected without UI failure");
+DesktopDockChecks.RunCore(Check, temp);
 ReliabilityChecks.RunCore(Check, temp);
 OfferInterfaceChecks.RunCore(Check);
 await UpdateChecks.RunCore(Check, temp);
