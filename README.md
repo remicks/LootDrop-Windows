@@ -37,3 +37,5 @@ This repository contains Windows version 2 only. The beta and iOS fork are maint
 
 
 
+
+Release notifications: [Discord announcements](DISCORD-RELEASES.md) wait for uploaded assets and disable all mentions.
