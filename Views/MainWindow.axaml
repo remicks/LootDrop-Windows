@@ -5,7 +5,7 @@
         xmlns:models="using:LootDrop.Models"
         xmlns:services="using:LootDrop.Services"
         x:Class="LootDrop.Views.MainWindow"
-        Title="LootDrop"
+        Title="LootDrop" FontSize="14"
         Foreground="{DynamicResource PrimaryTextBrush}"
         Width="1280" Height="850"
         MinWidth="1000" MinHeight="700"
@@ -127,6 +127,7 @@
             <Setter Property="Background" Value="{DynamicResource AccentHoverBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}"/>
         </Style>
+        <StyleInclude Source="/Styles/Interface.axaml"/>
     </Window.Styles>
 
     <Grid x:Name="ShellGrid" ColumnDefinitions="220,*">
@@ -214,6 +215,13 @@
                     <Button x:Name="NavSettings" ToolTip.Tip="Settings" Tag="settings"
                             Click="Navigation_Click"
                             HorizontalContentAlignment="Left">⚙  Settings</Button>
+                    <StackPanel x:Name="SettingsSubmenu" IsVisible="False" Margin="24,2,4,8" Spacing="1"><Button Classes="settings-link" Tag="general" Click="SettingsCategory_Click" Content="General"/>
+<Button Classes="settings-link" Tag="startup" Click="SettingsCategory_Click" Content="Startup &amp; tray"/>
+<Button Classes="settings-link" Tag="layout" Click="SettingsCategory_Click" Content="Window &amp; layout"/>
+<Button Classes="settings-link" Tag="appearance" Click="SettingsCategory_Click" Content="Appearance &amp; fonts"/>
+<Button Classes="settings-link" Tag="library" Click="SettingsCategory_Click" Content="Library &amp; backups"/>
+<Button Classes="settings-link" Tag="updates" Click="SettingsCategory_Click" Content="Updates"/>
+<Button Classes="settings-link" Tag="about" Click="SettingsCategory_Click" Content="About LootDrop"/></StackPanel>
 
                     <Button x:Name="NavThemes" ToolTip.Tip="Themes" Tag="themes"
                             Click="Navigation_Click"
@@ -280,6 +288,7 @@
 
                 <Grid x:Name="HeaderGrid" ColumnDefinitions="*,Auto">
 
+                    <TextBlock x:Name="SectionHeaderText" IsVisible="False" FontWeight="Medium" VerticalAlignment="Center" TextWrapping="Wrap"/>
                     <TextBox x:Name="SearchBox"
                              PlaceholderText="Search titles, descriptions or genres..."
                              MaxWidth="480"
@@ -464,16 +473,16 @@
                     </StackPanel>
                     <!-- GAME CARDS -->
 
-                    <ItemsControl x:Name="OffersList"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                    <ItemsControl x:Name="OffersList" HorizontalAlignment="Center"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="models:OfferGroup">
-                                <Expander Header="{Binding Summary}" IsExpanded="True" Width="{DynamicResource OfferGroupWidth}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,12,12"
+                                <Expander Classes="offer-group" Header="{Binding Summary}" IsExpanded="True" Width="{DynamicResource OfferGroupWidth}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,12,12"
                                           Background="{DynamicResource PanelBrush}" Foreground="{DynamicResource PrimaryTextBrush}" BorderBrush="{DynamicResource BorderBrush}">
-                    <Expander.HeaderTemplate><DataTemplate><TextBlock Text="{Binding}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxLines="2" MaxWidth="222" ToolTip.Tip="{Binding}"/></DataTemplate></Expander.HeaderTemplate><ItemsControl ItemsSource="{Binding Routes}">
+                    <Expander.HeaderTemplate><DataTemplate><TextBlock Text="{Binding}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxLines="2" Height="42" LineHeight="20" FontSize="13" VerticalAlignment="Center" MaxWidth="{DynamicResource OfferHeaderWidth}" ToolTip.Tip="{Binding}"/></DataTemplate></Expander.HeaderTemplate><ItemsControl ItemsSource="{Binding Routes}" HorizontalAlignment="Stretch">
 
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel/>
+                                <StackPanel/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
 
@@ -481,17 +490,17 @@
                             <DataTemplate x:DataType="models:GameOffer">
 
                                 <Border Width="{DynamicResource OfferCardWidth}" Background="{DynamicResource CardBrush}" BorderBrush="{DynamicResource BorderBrush}"
-                                        BorderThickness="1" CornerRadius="12" Padding="13" Margin="0,0,12,12">
+                                        BorderThickness="1" CornerRadius="12" Padding="13" Margin="0,0,0,12" HorizontalAlignment="Center">
                                     <StackPanel Spacing="9">
                                         <Button Classes="offer-title" Tag="{Binding}" Click="Details_Click" AutomationProperties.Name="{Binding Title, StringFormat='Details for {0}'}">
                                             <ToolTip.Tip><TextBlock Text="{Binding TitleTooltip}" MaxWidth="360" TextWrapping="Wrap"/></ToolTip.Tip>
-                                            <Border Background="{DynamicResource InputBrush}" CornerRadius="8" Height="120" Width="{DynamicResource OfferCoverWidth}" ClipToBounds="True">
+                                            <Border Background="{DynamicResource InputBrush}" CornerRadius="8" HorizontalAlignment="Center" Height="132" Width="{DynamicResource OfferCoverWidth}" ClipToBounds="True">
                                                 <Image Source="{Binding CoverImage}" Stretch="UniformToFill"/>
                                             </Border>
                                         </Button>
                                         <Button Classes="offer-title" Tag="{Binding}" Click="Details_Click" AutomationProperties.Name="{Binding Title, StringFormat='Details for {0}'}">
                                             <ToolTip.Tip><TextBlock Text="{Binding TitleTooltip}" MaxWidth="360" TextWrapping="Wrap"/></ToolTip.Tip>
-                                            <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="SemiBold" MaxLines="2" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding Title}" FontSize="15" LineHeight="21" Height="42" FontWeight="SemiBold" MaxLines="2" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"/>
                                         </Button>
                                         <Grid ColumnDefinitions="*,Auto" ToolTip.Tip="{Binding OriginTooltip}">
                                             <TextBlock Text="{Binding ClaimVia}" Classes="muted" FontSize="11" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
@@ -571,15 +580,16 @@
             <!-- Dedicated settings page: no settings panel in Discovery. -->
             <ScrollViewer x:Name="SettingsScroll" Grid.Row="0"
                           IsVisible="False" VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin="25" Spacing="20" MaxWidth="820" HorizontalAlignment="Left">
+                <StackPanel x:Name="SettingsPage" Margin="25" Spacing="18" MaxWidth="900" HorizontalAlignment="Stretch">
                     <TextBlock Text="PREFERENCES" Foreground="{DynamicResource AccentBrightBrush}" FontSize="11" FontWeight="Bold"/>
-                    <TextBlock Text="Settings" Classes="heading"/>
-                    <TextBlock Text="Control how LootDrop launches, filters games and uses the system tray."
+                    <ComboBox x:Name="SettingsCategoryBox" IsVisible="False" HorizontalAlignment="Stretch" SelectionChanged="SettingsCategory_Changed" AutomationProperties.Name="Settings category"><ComboBoxItem Content="General"/><ComboBoxItem Content="Startup &amp; tray"/><ComboBoxItem Content="Window &amp; layout"/><ComboBoxItem Content="Appearance &amp; fonts"/><ComboBoxItem Content="Library &amp; backups"/><ComboBoxItem Content="Updates"/><ComboBoxItem Content="About LootDrop"/></ComboBox>
+                    <TextBlock x:Name="SettingsCategoryTitle" Text="General" Classes="heading"/>
+                    <TextBlock x:Name="SettingsCategoryDescription" Text="Choose how LootDrop works for you."
                                Classes="muted" TextWrapping="Wrap"/>
 
-                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                    <Border x:Name="SettingsGeneralPanel" Classes="settings-card" Background="{DynamicResource PanelBrush}" >
                         <StackPanel Spacing="12">
-                            <TextBlock Text="DISCOVERY FILTERS" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <TextBlock Text="Discovery preferences" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
                             <CheckBox x:Name="RememberFiltersCheck"
                                       Content="Remember selected platforms and store on startup"
                                       IsChecked="False" Foreground="{DynamicResource PrimaryTextBrush}"/>
@@ -590,16 +600,16 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                    <Border x:Name="SettingsStartupPanel" Classes="settings-card" Background="{DynamicResource PanelBrush}" >
                         <StackPanel Spacing="12">
-                            <TextBlock Text="SYSTEM TRAY &amp; STARTUP" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
-                            <CheckBox x:Name="MinimizeToTrayCheck"
+                            <TextBlock Text="Tray behavior" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <CheckBox MinHeight="44" Theme="{StaticResource PreferenceSwitch}" x:Name="MinimizeToTrayCheck"
                                       Content="Minimize to the system tray instead of the taskbar"
                                       IsChecked="True" Foreground="{DynamicResource PrimaryTextBrush}"/>
-                            <CheckBox x:Name="CloseToTrayCheck"
+                            <CheckBox MinHeight="44" Theme="{StaticResource PreferenceSwitch}" x:Name="CloseToTrayCheck"
                                       Content="Close button sends LootDrop to the system tray"
                                       IsChecked="False" Foreground="{DynamicResource PrimaryTextBrush}"/>
-                            <CheckBox x:Name="StartWithWindowsCheck"
+                            <CheckBox MinHeight="44" Theme="{StaticResource PreferenceSwitch}" x:Name="StartWithWindowsCheck"
                                       Content="Start LootDrop with Windows, minimized to the tray"
                                       IsChecked="False" Foreground="{DynamicResource PrimaryTextBrush}"/>
                             <TextBlock Text="Windows startup uses a per-user startup entry; no administrator permission is required. When in the tray, right-click its icon for Show / Settings / Exit."
@@ -609,10 +619,10 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                    <Border x:Name="SettingsDockPanel" Classes="settings-card" Background="{DynamicResource PanelBrush}" >
                         <StackPanel Spacing="10">
-                            <TextBlock Text="DESKTOP SIDEBAR MODE" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
-                            <CheckBox x:Name="DockEnableCheck" Foreground="{DynamicResource PrimaryTextBrush}"><TextBlock Text="Pin as a sidebar and reserve desktop space" TextWrapping="Wrap"/></CheckBox>
+                            <TextBlock Text="Desktop sidebar" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <CheckBox MinHeight="44" Theme="{StaticResource PreferenceSwitch}" x:Name="DockEnableCheck" Foreground="{DynamicResource PrimaryTextBrush}"><TextBlock Text="Pin as a sidebar and reserve desktop space" TextWrapping="Wrap"/></CheckBox>
                             <TextBlock Text="Other maximized apps use the remaining desktop. Fullscreen games may cover the sidebar. Hiding or exiting releases its space." Classes="muted" TextWrapping="Wrap"/>
                             <TextBlock Text="Display" Classes="muted"/>
                             <ComboBox x:Name="DockMonitorBox" HorizontalAlignment="Stretch" AutomationProperties.Name="Sidebar display"/>
@@ -623,10 +633,10 @@
                             <TextBlock x:Name="DockStatusText" Classes="muted" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Border>
-                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                    <Border x:Name="SettingsNavigationPanel" Classes="settings-card" Background="{DynamicResource PanelBrush}" >
                         <StackPanel Spacing="12">
-                            <TextBlock Text="NAVIGATION SIDEBAR" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
-                            <CheckBox x:Name="SidebarCollapsedCheck" Content="Use compact icon-only sidebar" Foreground="{DynamicResource PrimaryTextBrush}"/>
+                            <TextBlock Text="Navigation" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <CheckBox MinHeight="44" Theme="{StaticResource PreferenceSwitch}" x:Name="SidebarCollapsedCheck" Content="Use compact icon-only sidebar" Foreground="{DynamicResource PrimaryTextBrush}"/>
                             <TextBlock Text="Sidebar position" Classes="muted"/>
                             <ComboBox x:Name="SidebarPositionBox" Width="220" HorizontalAlignment="Left" SelectedIndex="0">
                                 <ComboBoxItem Content="Left"/>
@@ -636,18 +646,28 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                    <Border x:Name="SettingsFontPanel" Classes="settings-card" Background="{DynamicResource PanelBrush}"><StackPanel Spacing="14">
+                        <TextBlock Text="Interface font" FontSize="18" FontWeight="SemiBold"/>
+                        <TextBlock Text="Four built-in typefaces. Changes apply instantly and stay on this computer." Classes="muted" TextWrapping="Wrap"/>
+                        <ComboBox x:Name="FontChoiceBox" HorizontalAlignment="Stretch" SelectionChanged="FontChoice_Changed" AutomationProperties.Name="Interface font">
+                            <ComboBox.ItemTemplate><DataTemplate x:DataType="services:AppFontChoice"><TextBlock Text="{Binding Name}" FontFamily="{Binding Family}" FontSize="16"/></DataTemplate></ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Border Background="{DynamicResource InputBrush}" Padding="16" CornerRadius="12"><StackPanel Spacing="8"><TextBlock x:Name="FontPreviewText" Text="Your next great game awaits." FontSize="22" FontWeight="SemiBold" TextWrapping="Wrap"/><TextBlock Text="Explore · Collect · Play   0123456789" Classes="muted" TextWrapping="Wrap"/></StackPanel></Border>
+                        <TextBlock x:Name="FontDescriptionText" Classes="muted" TextWrapping="Wrap"/>
+                        <Button Content="Themes &amp; app icons →" Tag="themes" Click="Navigation_Click" HorizontalAlignment="Left"/>
+                    </StackPanel></Border>
+                    <Border x:Name="SettingsAppearancePanel" Classes="settings-card" Background="{DynamicResource PanelBrush}" >
                         <StackPanel Spacing="12">
-                            <TextBlock Text="PERFORMANCE &amp; APPEARANCE" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <TextBlock Text="Display &amp; performance" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
                             <TextBlock Text="Window opacity (65–100%)" Classes="muted"/>
                             <Slider x:Name="WindowOpacitySlider" Minimum="65" Maximum="100" Value="100" TickFrequency="5"/>
                             <TextBlock x:Name="WindowOpacityLabel" Classes="muted" Text="100%"/>
                             <TextBlock Text="Wallpaper brightness (dark overlay)" Classes="muted"/>
                             <Slider x:Name="WallpaperDimSlider" Minimum="0" Maximum="95" Value="72" TickFrequency="5"/>
                             <TextBlock x:Name="WallpaperDimLabel" Classes="muted" Text="72% dimmed"/>
-                            <CheckBox x:Name="LowGraphicsCheck" Content="Low graphics mode (disable wallpaper and cover downloads; refresh after turning off)" Foreground="{DynamicResource PrimaryTextBrush}"/>
+                            <CheckBox MinHeight="44" Theme="{StaticResource PreferenceSwitch}" x:Name="LowGraphicsCheck" Content="Low graphics mode (disable wallpaper and cover downloads; refresh after turning off)" Foreground="{DynamicResource PrimaryTextBrush}"/>
                             <TextBlock Text="Graphics renderer (takes effect after restart)" Classes="muted"/>
-                            <ComboBox x:Name="RendererBox" Width="310" HorizontalAlignment="Left" SelectedIndex="0">
+                            <ComboBox x:Name="RendererBox" HorizontalAlignment="Stretch" SelectedIndex="0">
                                 <ComboBoxItem Content="Automatic (GPU with software fallback)"/>
                                 <ComboBoxItem Content="Software only (CPU)"/>
                             </ComboBox>
@@ -655,9 +675,9 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                    <Border x:Name="SettingsLibraryPanel" Classes="settings-card" Background="{DynamicResource PanelBrush}" >
                         <StackPanel Spacing="10">
-                            <TextBlock Text="BACKUPS &amp; PORTABLE LIBRARY" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <TextBlock Text="Collection backups" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
                             <TextBlock Text="A local snapshot is saved before the first library change each day. The 20 newest automatic/recovery snapshots are retained. Export and import include saved games and named themes; device settings and wallpaper paths are not imported." Classes="muted" TextWrapping="Wrap"/>
                             <WrapPanel>
                                 <Button Content="Export library…" Click="ExportLibrary_Click"/>
@@ -667,9 +687,9 @@
                             <TextBlock x:Name="LibraryTransferStatus" Classes="muted" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Border>
-                    <Border x:Name="UpdatesPanel" Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                    <Border Classes="settings-card" x:Name="UpdatesPanel" Background="{DynamicResource PanelBrush}" >
                         <StackPanel Spacing="12">
-                            <TextBlock Text="APP UPDATES" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
+                            <TextBlock Text="Release updates" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextAccentBrush}"/>
                             <TextBlock x:Name="InstalledVersionText"/>
                             <TextBlock Text="Check public releases from remicks/LootDrop-Windows on GitHub. Checks happen only when you click. GitHub receives your network address; no store credentials or collection data are sent." TextWrapping="Wrap" Classes="muted"/>
                             <CheckBox x:Name="IncludePrereleasesCheck" Content="Include tester prereleases" ToolTip.Tip="Off by default. Tester builds may be unsigned and are not ready for general release."/>
@@ -682,9 +702,9 @@
                         </StackPanel>
                     </Border>
                     <!-- Read-only About section: credits and links will be populated in a future release. -->
-                    <Border Background="{DynamicResource PanelBrush}" CornerRadius="10" Padding="18">
+                    <Border x:Name="SettingsAboutPanel" Classes="settings-card" Background="{DynamicResource PanelBrush}" >
                         <StackPanel Spacing="12">
-                            <TextBlock Text="ABOUT LOOTDROP" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
+                            <TextBlock Text="Made for game discovery" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource AccentBrightBrush}"/>
                             <Border x:Name="DeveloperCredit" Background="{DynamicResource CardBrush}" Padding="12" CornerRadius="8">
                                 <Grid ColumnDefinitions="72,*" ColumnSpacing="14">
                                     <Border Background="Black" Width="72" Height="72" CornerRadius="10" ClipToBounds="True"><Image x:Name="DeveloperArtwork" Source="/Assets/Branding/degenerates-inc-duo.png" RenderOptions.BitmapInterpolationMode="HighQuality" Stretch="Uniform" AutomationProperties.Name="Degenerates Inc. wolf, lion and raccoon artwork"/></Border>
@@ -703,6 +723,7 @@
                             <TextBlock Text="Credits coming soon" Foreground="{DynamicResource PrimaryTextBrush}" TextWrapping="Wrap"/>
                             <TextBlock Text="CONTRIBUTORS &amp; SPECIAL THANKS" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrightBrush}"/>
                             <TextBlock Text="Credits coming soon" Foreground="{DynamicResource PrimaryTextBrush}" TextWrapping="Wrap"/>
+                            <Expander Header="Additional bundled font licenses" HorizontalAlignment="Stretch"><ScrollViewer MaxHeight="220"><TextBlock x:Name="FontLicenseText" FontSize="11" TextWrapping="Wrap" Margin="12"/></ScrollViewer></Expander>
                             <TextBlock Text="COMMUNITY &amp; SOCIAL LINKS" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrightBrush}"/>
                             <TextBlock Text="Discord and social links will be added in a future update."
                                        Classes="muted" TextWrapping="Wrap"/>

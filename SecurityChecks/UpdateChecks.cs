@@ -89,6 +89,7 @@ internal static class UpdateChecks
         window.CheckForUpdatesAsync().GetAwaiter().GetResult();Dispatcher.UIThread.RunJobs();
         check(requests==1 && window.FindControl<TextBlock>("UpdateStatusText")!.Text!.Contains("v9.0.0") && window.FindControl<Button>("DownloadUpdateButton")!.IsEnabled,"Real update UI shows a newer tester release and enables its validated download");
         window.FindControl<Button>("NavSettings")!.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));Dispatcher.UIThread.RunJobs();
+        window.FindControl<StackPanel>("SettingsSubmenu")!.Children.OfType<Button>().Single(b=>b.Tag as string=="updates").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         window.FindControl<Border>("UpdatesPanel")!.BringIntoView();Dispatcher.UIThread.RunJobs();AvaloniaHeadlessPlatform.ForceRenderTimerTick();
         if(screenshots){using var frame=window.CaptureRenderedFrame();frame!.Save(Path.Combine(AppContext.BaseDirectory,"theme-screenshots","Update-Checker.png"),new Avalonia.Media.Imaging.PngBitmapEncoderOptions());}
         window.FindControl<CheckBox>("IncludePrereleasesCheck")!.IsChecked=false;

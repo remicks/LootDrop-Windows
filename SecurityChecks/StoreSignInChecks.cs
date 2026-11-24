@@ -71,6 +71,7 @@ internal static class StoreSignInChecks
         if(screenshots)
         {
             window.FindControl<Button>("NavSettings")!.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            window.FindControl<StackPanel>("SettingsSubmenu")!.Children.OfType<Button>().Single(b=>b.Tag as string=="about").RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             Dispatcher.UIThread.RunJobs(); var settingsScroll = window.FindControl<ScrollViewer>("SettingsScroll")!; settingsScroll.Offset = new Avalonia.Vector(0, settingsScroll.Extent.Height);
             Dispatcher.UIThread.RunJobs(); AvaloniaHeadlessPlatform.ForceRenderTimerTick();
             using(var frame=window.CaptureRenderedFrame()) frame!.Save(Path.Combine(AppContext.BaseDirectory,"theme-screenshots","Branding-About.png"),new Avalonia.Media.Imaging.PngBitmapEncoderOptions());

@@ -26,5 +26,6 @@
 
     <Application.Styles>
         <FluentTheme />
+        <Style Selector="Window"><Setter Property="FontFamily" Value="{DynamicResource InterfaceFont}"/><Setter Property="FontSize" Value="14"/></Style>
     </Application.Styles>
 </Application>

@@ -2,7 +2,7 @@
 
 A Windows desktop app by **Degenerates Inc.** for discovering free-game offers and tracking a local wishlist and claimed collection.
 
-Current version: **0.7.12 — unsigned desktop sidebar tester prerelease**. Download published builds from [Releases](https://github.com/remicks/LootDrop-Windows/releases). See [release notes](RELEASE-0.7.12.md), [Help](HELP.md), and the [sidebar security/stability review](SECURITY-SIDEBAR-0.7.12.md).
+Current version: **0.7.13 — fonts and Settings tester prerelease**. Download published builds from [Releases](https://github.com/remicks/LootDrop-Windows/releases). See [release notes](RELEASE-0.7.13.md), [Help](HELP.md), and the [UI security/stability review](SECURITY-UI-0.7.13.md).
 
 ## Features
 
@@ -12,12 +12,14 @@ Current version: **0.7.12 — unsigned desktop sidebar tester prerelease**. Down
 - Manual GitHub update checks and checksum-verified installer/portable downloads, with no automatic installation.
 - Optional desktop sidebar with Windows-reserved screen space, display/edge selection and a single-column layout.
 - Eight embedded Windows icon colors, independent icon selection and explicit themed desktop shortcuts.
+- Four embedded interface fonts, categorized Settings and rounded controls.
+- Four embedded interface fonts, categorized Settings and rounded controls.
 - 18 themes, searchable Help, library export/import and recovery backups.
 - Self-contained Windows x64 installer and portable packages.
 
 ## Safety and testing
 
-The regression suite completed 547 checks for this candidate. 62 native Windows docking checks passed across three displays; remaining hardware coverage are documented in the sidebar review. Packages are unsigned. Native installation/update/uninstall, real browser sign-in and clean-machine validation remain outstanding; passing tests is not a security certification. Do not disable antivirus or SmartScreen. Start testing in a disposable Windows account/VM without valuable store credentials. Windows v2 stores data under `%LOCALAPPDATA%\LootDrop`; portable and installed v2 share that location.
+The regression suite completed 599 checks for this version. 62 native Windows docking checks passed across three displays; remaining hardware coverage is documented in the UI review. Packages are unsigned. Native installation/update/uninstall, real browser sign-in and clean-machine validation remain outstanding; passing tests is not a security certification. Do not disable antivirus or SmartScreen. Start testing in a disposable Windows account/VM without valuable store credentials. Windows v2 stores data under `%LOCALAPPDATA%\LootDrop`; portable and installed v2 share that location.
 
 ## Build
 

@@ -132,6 +132,8 @@ public partial class MainWindow
     {
         if (_dockAppearance == enabled) return;
         _dockAppearance = enabled;
+        Classes.Set("docked", enabled);
+        UpdateSettingsNavigation();
         if (enabled)
         {
             _normalPosition = Position; _normalSize = ClientSize; _normalState = WindowState; _normalTopmost = Topmost;
@@ -164,7 +166,7 @@ public partial class MainWindow
         foreach (var scroll in new[] { DiscoveryScroll, SettingsScroll, ThemesScroll, StoreSignInScroll, HelpScroll })
         {
             if (scroll.Content is Control panel)
-            { panel.Margin = new Thickness(enabled ? 12 : scroll == StoreSignInScroll || scroll == DiscoveryScroll ? 22 : 25); panel.HorizontalAlignment = enabled || scroll == DiscoveryScroll || scroll == HelpScroll ? HorizontalAlignment.Stretch : HorizontalAlignment.Left; }
+            { panel.Margin = new Thickness(enabled ? 12 : scroll == StoreSignInScroll || scroll == DiscoveryScroll ? 22 : 25); panel.HorizontalAlignment = enabled || scroll == DiscoveryScroll || scroll == SettingsScroll || scroll == HelpScroll ? HorizontalAlignment.Stretch : HorizontalAlignment.Left; }
         }
         AvailableLabel.Text = enabled ? "DROPS" : "AVAILABLE DROPS";
         SavingsLabel.Text = enabled ? "VALUE" : "POTENTIAL SAVINGS";
@@ -181,6 +183,7 @@ public partial class MainWindow
         Resources["OfferGroupWidth"] = width;
         Resources["OfferCardWidth"] = width - 32;
         Resources["OfferCoverWidth"] = width - 60;
+        Resources["OfferHeaderWidth"] = width - 76;
     }
 
     private void UpdateDockNavigation()

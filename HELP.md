@@ -89,6 +89,12 @@ Choose Current display to capture the display LootDrop is on when docking starts
 Use the page menu at the top for Discover, collections, Settings, Themes and Help. Platforms & stores expands the filters. The arrow button returns to the normal window; the dash hides to tray. Hiding, minimizing or exiting releases the reservation. Restoring from tray reserves space again if enabled. Docking remembers your preference on this PC; importing a collection cannot enable it.
 No administrator access, new network requests or Windows security changes are needed. Explorer restarts and display/DPI changes trigger a fresh position negotiation. If negotiation fails, LootDrop releases its reservation and returns to a normal window.
 
+## Settings categories, fonts and rounded controls
+
+Settings branches into General, Startup & tray, Window & layout, Appearance & fonts, Library & backups, Updates and About LootDrop. Pick a category in the left submenu; compact navigation and desktop sidebar mode use a category dropdown. Only the relevant options are shown.
+Appearance & fonts offers Outfit, Space Grotesk, Sora and Inter. Select a typeface for an instant preview throughout the interface. The files are bundled inside LootDrop, work offline and are not installed in Windows. The choice stays on this computer and collection imports preserve it. Additional font licenses are available under About. Themes & app icons opens the existing theme page.
+Pill-shaped switches control on/off preferences; rounder checkboxes keep their checkmarks for selections. Click a switch or its label, or focus it and press Space. A visible keyboard focus outline remains available. Low graphics mode disables the new switch animations. Changing fonts or navigating Settings does not enable Windows startup, download updates or turn on desktop docking.
+
 ## Privacy and safe testing
 
 Collection data, cache, themes and backups stay under the version 2 LootDrop local-data folder. The iOS fork and beta have separate projects/data. There is no store login, password storage, cloud sync, automatic claim or diagnostic upload.

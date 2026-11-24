@@ -169,7 +169,7 @@ public partial class MainWindow : Window
             var state = _library.Load();
             foreach (var game in state.Games.Where(g => g.Id > 0 && (g.IsWishlisted || g.IsClaimed || g.IsReportedNotFree)))
                 _saved[OfferIdentity.Key(game)] = game;
-            themeName = state.ThemeName; preferredIcon = state.AppIconKey;
+            themeName = state.ThemeName; preferredIcon = state.AppIconKey; _fontKey = state.AppFontKey;
             customAccentHex = state.CustomAccentHex;
             customThemeBasePreset = ThemeCatalog.Resolve(state.CustomThemeBasePreset).Name;
             if (state.CustomThemes != null)
@@ -212,6 +212,7 @@ public partial class MainWindow : Window
             StatusText.Text = $"Saved library could not be read: {ex.Message}";
         }
         InitializeIconChoices();
+        InitializeSettingsInterface();
         _isReady = true;
         ApplyTheme(themeName, customAccentHex, save: false);
         RefreshSavedThemeList();
@@ -225,6 +226,7 @@ public partial class MainWindow : Window
         updatingSettingsControls = false;
         ApplySidebarLayout();
         ApplyAppearancePreferences();
+        Classes.Set("reduced-motion", lowGraphicsMode);
         ApplyBackgroundImage();
         UpdateSelectedButtons();
         UpdateStats();
@@ -266,7 +268,7 @@ public partial class MainWindow : Window
                 StartWithWindows = startWithWindows,
                 SelectedStore = selectedStores.Count == 1 ? selectedStores.First() : "All",
                 SelectedStores = selectedStores.OrderBy(x => x).ToList(),
-                ThemeName = themeName, AppIconKey = preferredIcon,
+                ThemeName = themeName, AppIconKey = preferredIcon, AppFontKey = _fontKey,
                 CustomAccentHex = customAccentHex,
                 CustomThemeBasePreset = customThemeBasePreset,
                 CustomThemes = customThemes.ToList(),
@@ -769,6 +771,8 @@ public partial class MainWindow : Window
         RequestedThemeVariant = palette.IsLight ? Avalonia.Styling.ThemeVariant.Light : Avalonia.Styling.ThemeVariant.Dark;
         foreach (var brush in ThemeCatalog.Brushes(palette))
             Resources[brush.Key] = new SolidColorBrush(Color.Parse(brush.Value));
+        foreach (var key in new[] { "SliderThumbBackground", "SliderThumbBackgroundPointerOver", "SliderThumbBackgroundPressed" })
+            Resources[key] = Resources["AccentBrush"];
         UpdateWallpaperOverlay();
 
         var iconKey = ApplyResolvedIcon(isCustom ? ClosestIcon(color) : ThemePresets[name].Icon);
@@ -980,6 +984,7 @@ public partial class MainWindow : Window
     private void ApplySidebarLayout()
     {
         if (_dockAppearance) return;
+        UpdateSettingsNavigation();
         const int compactWidth = 76;
         const int expandedWidth = 220;
         var width = sidebarCollapsed ? compactWidth : expandedWidth;
@@ -1033,6 +1038,7 @@ public partial class MainWindow : Window
         line.Children.Add(new TextBlock
         {
             Text = icon,
+            FontFamily = new FontFamily("Segoe UI Symbol"),
             FontSize = collapsed ? 23 : 19,
             FontWeight = Avalonia.Media.FontWeight.SemiBold,
             Width = collapsed ? 28 : 25,
@@ -1059,6 +1065,7 @@ public partial class MainWindow : Window
         lowGraphicsMode = LowGraphicsCheck.IsChecked == true;
         forceSoftwareRendering = RendererBox.SelectedIndex == 1;
         ApplyAppearancePreferences();
+        Classes.Set("reduced-motion", lowGraphicsMode);
         // Reload the wallpaper only when the low-graphics visibility setting changes.
         ThemeBackgroundImage.IsVisible = !lowGraphicsMode && !string.IsNullOrWhiteSpace(backgroundImagePath) && ThemeBackgroundImage.Source != null;
         ThemeBackgroundOverlay.IsVisible = ThemeBackgroundImage.IsVisible;
@@ -1131,6 +1138,7 @@ public partial class MainWindow : Window
     {
         CloseOfferDetails();
         currentSection = section;
+        UpdateSettingsNavigation();
         UpdateDockNavigation();
         var settingsPage = section == "settings";
         var themesPage = section == "themes";

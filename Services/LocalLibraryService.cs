@@ -51,6 +51,7 @@ public sealed class LocalLibraryService
                 state.DesktopDockMonitor == null || state.DesktopDockMonitor.Length > 32 ||
                 state.DesktopDockMonitor.Any(char.IsControl))
                 throw new InvalidDataException("Unsupported desktop docking preferences.");
+            if (!FontCatalog.IsValid(state.AppFontKey)) throw new InvalidDataException("Unsupported embedded font choice.");
             if (!AppIconCatalog.IsValid(state.AppIconKey)) throw new InvalidDataException("Unsupported app icon choice.");
             if (state.SelectedPlatforms == null || state.SelectedStores == null ||
                 state.SelectedPlatforms.Count > 32 || state.SelectedStores.Count > 32 ||
@@ -126,6 +127,7 @@ public sealed class LibraryState
     public bool CloseToTray { get; set; } = false;
     public bool StartWithWindows { get; set; } = false;
     public List<string> SelectedStores { get; set; } = new();
+    public string AppFontKey { get; set; } = "outfit";
     public string AppIconKey { get; set; } = "theme";
     public string ThemeName { get; set; } = "Purple";
     public string CustomAccentHex { get; set; } = "#A448F4";

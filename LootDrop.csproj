@@ -3,7 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-    <Version>0.7.12</Version><Company>Degenerates Inc.</Company><Authors>Degenerates Inc.</Authors>
+    <Version>0.7.13</Version><Company>Degenerates Inc.</Company><Authors>Degenerates Inc.</Authors>
     <NuGetLockFilePath>packages.$(Configuration).lock.json</NuGetLockFilePath>
     <Nullable>enable</Nullable>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
@@ -18,6 +18,7 @@
     <Compile Remove="SecurityChecks\**\*.cs" /><Compile Remove="build\**\*.cs" />
     <Folder Include="Models\" />
     <!-- Only ICOs and the selected local branding artwork are embedded; unused preview assets stay in source. -->
+    <AvaloniaResource Include="Assets\Fonts\*.ttf" /><AvaloniaResource Include="Assets\Fonts\*-OFL.txt" />
     <AvaloniaResource Include="Assets\lootdrop-*.ico" /><AvaloniaResource Include="Assets\Branding\degenerates-inc-duo.png" />
   </ItemGroup>
 
