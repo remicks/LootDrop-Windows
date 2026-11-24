@@ -55,7 +55,7 @@ Exports contain collection information and links. They are not encrypted; share 
 
 ## Themes, wallpaper and performance
 
-Themes offers 18 presets, including dark, light, pastel and neon combinations. Select a preset, adjust HEX/RGB if desired, and save a named custom theme. Its base colors are retained when reloaded.
+Themes offers 24 presets, including dark, light, pastel and neon combinations. Select a preset, adjust HEX/RGB if desired, and save a named custom theme. Its base colors are retained when reloaded.
 Wallpaper is optional and copied to the managed local folder. Low graphics mode disables covers/wallpaper. Software rendering is available for driver problems and takes effect after restart. Large or unsupported images are rejected for safety.
 
 ## Tray, startup and keyboard access
@@ -92,7 +92,7 @@ No administrator access, new network requests or Windows security changes are ne
 ## Settings categories, fonts and rounded controls
 
 Settings branches into General, Startup & tray, Window & layout, Appearance & fonts, Library & backups, Updates and About LootDrop. Pick a category in the left submenu; compact navigation and desktop sidebar mode use a category dropdown. Only the relevant options are shown.
-Appearance & fonts offers Outfit, Space Grotesk, Sora and Inter. Select a typeface for an instant preview throughout the interface. The files are bundled inside LootDrop, work offline and are not installed in Windows. The choice stays on this computer and collection imports preserve it. Additional font licenses are available under About. Themes & app icons opens the existing theme page.
+Appearance & fonts offers nine bundled choices: Outfit, Space Grotesk, Sora, Inter, Lato, Montserrat, Source Sans 3, IBM Plex Sans and Atkinson Hyperlegible. Select a typeface for an instant preview throughout the interface. The files are bundled inside LootDrop, work offline and are not installed in Windows. The choice stays on this computer and collection imports preserve it. Additional font licenses are available under About. Themes & app icons opens the existing theme page.
 Pill-shaped switches control on/off preferences; rounder checkboxes keep their checkmarks for selections. Click a switch or its label, or focus it and press Space. A visible keyboard focus outline remains available. Low graphics mode disables the new switch animations. Changing fonts or navigating Settings does not enable Windows startup, download updates or turn on desktop docking.
 
 ## Privacy and safe testing

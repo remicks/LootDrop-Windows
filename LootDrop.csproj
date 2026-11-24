@@ -3,7 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-    <Version>0.7.13</Version><Company>Degenerates Inc.</Company><Authors>Degenerates Inc.</Authors>
+    <Version>0.7.14</Version><Company>Degenerates Inc.</Company><Authors>Degenerates Inc.</Authors>
     <NuGetLockFilePath>packages.$(Configuration).lock.json</NuGetLockFilePath>
     <Nullable>enable</Nullable>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>

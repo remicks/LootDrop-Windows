@@ -12,8 +12,8 @@ internal static class ThemeChecks
 {
     public static void Run(Action<bool, string> check, string temporaryRoot, bool screenshots)
     {
-        check(ThemeCatalog.Presets.Count == 18, "Eight existing plus ten new theme presets available");
-        check(ThemeCatalog.Presets.Values.Count(p => p.IsLight) == 5, "Five genuinely light/pastel palettes available");
+        check(ThemeCatalog.Presets.Count == 24, "All twenty-four theme presets available");
+        check(ThemeCatalog.Presets.Values.Count(p => p.IsLight) == 7, "Seven light/pastel palettes available");
         check(ThemeCatalog.Resolve("unknown").Name == "Purple", "Unknown theme safely falls back to original Purple");
         foreach (var palette in ThemeCatalog.Presets.Values)
         {
@@ -49,7 +49,7 @@ internal static class ThemeChecks
         Dispatcher.UIThread.RunJobs();
         var themeButtons = window.GetLogicalDescendants().OfType<Button>()
             .Where(b => b.Tag is string name && ThemeCatalog.Presets.ContainsKey(name)).ToArray();
-        check(themeButtons.Length == 18, "All eighteen presets have selectable UI buttons");
+        check(themeButtons.Length == 24, "All twenty-four presets have selectable UI buttons");
         var output = Path.Combine(AppContext.BaseDirectory, "theme-screenshots");
         if (screenshots) Directory.CreateDirectory(output);
         foreach (var palette in ThemeCatalog.Presets.Values)
@@ -100,6 +100,7 @@ internal static class ThemeChecks
         var restored = new MainWindow(new LocalLibraryService(folder), enableBackgroundWork: false);
         check(restored.Resources["AppBackgroundBrush"] is SolidColorBrush restoredBrush && restoredBrush.Color == Color.Parse(ThemeCatalog.Presets["Mint Sorbet"].Background), "Custom palette survives a fresh window load");
         restored.AllowExit(); restored.Close();
+        ThemeExpansionChecks.Run(check, temporaryRoot, screenshots);
         InterfaceChecks.RunWindow(check, temporaryRoot, screenshots);
         DesktopDockChecks.RunWindow(check, temporaryRoot, screenshots);
         ReliabilityChecks.RunWindow(check, temporaryRoot, screenshots);

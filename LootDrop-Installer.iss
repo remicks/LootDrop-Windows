@@ -4,7 +4,7 @@
 ; LootDrop Windows x64 per-user installer — Inno Setup 6
 ; Compile with Build-Tester-Releases.ps1 or open this file in Inno Setup.
 #define MyAppName "LootDrop"
-#define MyAppVersion "0.7.13"
+#define MyAppVersion "0.7.14"
 #define MyAppExeName "LootDrop.exe"
 
 [Setup]

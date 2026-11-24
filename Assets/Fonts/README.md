@@ -19,3 +19,31 @@ b02621d4009da9a18eb8a5cbe277f084eb9c3f065ba08a6e77769e81863becf2  Sora-SemiBold.
 564ce565c371c5e5bbf286006565a7c9aa55a9f56e7ca58d56e05d649dd61a72  SpaceGrotesk-OFL.txt
 5ede28c4425f3fe4830c8f4754b39e9a87a93d0c3baa5e0a9924532aaa8a98bd  SpaceGrotesk-Regular.ttf
 
+
+## Version 0.7.14 expansion
+
+Five further families use ten unmodified static TTF files (3,610,000 bytes), plus their complete unchanged licenses. All fonts/licenses are embedded. No variable-font defaults or subsetting is introduced.
+
+- Lato: google/fonts at 06bfe0d62a98375cb09c942fa18e68bd32cff057, ofl/lato, Regular + SemiBold and OFL.txt.
+- Montserrat: JulietaUla/Montserrat at 555facfb2a18c72c3c0380f0d9c0f060453a9058, fonts/ttf, Regular + SemiBold and root OFL.txt.
+- Source Sans 3: adobe-fonts/source-sans at 87b37a2daaed80fcb8e8ccb0085c4d72ddade12e, TTF, Regular + Semibold and root LICENSE.md (copied as SourceSans3-OFL.txt).
+- IBM Plex Sans: IBM/plex at 2e90fe366fdc27c12682db13e5aa20ded3d90908, packages/plex-sans/fonts/complete/ttf, Regular + SemiBold and packages/plex-sans/LICENSE.txt (copied as IBMPlexSans-OFL.txt).
+- Atkinson Hyperlegible: google/fonts at 06bfe0d62a98375cb09c942fa18e68bd32cff057, ofl/atkinsonhyperlegible, Regular + Bold and OFL.txt.
+
+Full source mappings: provenance-0.7.14.json. These public repository paths are metadata, not runtime requests. Below are SHA-256 hashes of the exact added assets.
+5a3b0c8cc8ca545155150b4512a1fa248298df121c50d6557e651e61fbdab92f  AtkinsonHyperlegible-Bold.ttf
+f32d22b3908fcad2c86a74000614ec22e6a7f66ea7e867e616026a27aebdc143  AtkinsonHyperlegible-OFL.txt
+7fb917c89019896d0b52ee84b7cbb3304c18cb90b19a62f5e32712bd23e97669  AtkinsonHyperlegible-Regular.ttf
+7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da  IBMPlexSans-OFL.txt
+b47ebd72b5ce53b60f909033ff84d6fc12358cc147e2981f8c321ad3f36246b6  IBMPlexSans-Regular.ttf
+c51119b25f4a296da2b66edf3201b9aa1735091ed7efc1fca0313346f3851a4d  IBMPlexSans-SemiBold.ttf
+74ba064d03f1f1c4a952da936c3eb71866c34404916734de3cae73b34357e59e  Lato-OFL.txt
+d636e4683231f931eda222d588e944d082bfd3bdba02f928bee461c0f185b251  Lato-Regular.ttf
+71b8b7decbe75a881ed267be539d402bd1e9420b799658aada4e0d1bd5af803c  Lato-SemiBold.ttf
+8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e  Montserrat-OFL.txt
+3e8abe50c44c82e2242e97d1ec8c0d385c4890cdc50447bcdb8605c81a38cfb2  Montserrat-Regular.ttf
+b4e1563393d73fdff491a869441245aef31add2ec03d9c97a6dae4de07c52fd0  Montserrat-SemiBold.ttf
+56af9b9c6715597e458284a474dc118a50a4150e9d547c70f7b4a33c3e6a9328  SourceSans3-OFL.txt
+4644c81b86ec9caaa76b634889968ed3c4f4f52f054855933acc7c2b21e53b0f  SourceSans3-Regular.ttf
+a3f4f8dcf343a8f24dc61951de93f3ba1558b15cd250ba24af8a40e957081b7d  SourceSans3-Semibold.ttf
+

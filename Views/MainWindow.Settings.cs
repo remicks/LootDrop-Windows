@@ -25,9 +25,10 @@ public partial class MainWindow
         FontChoiceBox.ItemsSource = FontCatalog.Choices;
         FontChoiceBox.SelectedItem = FontCatalog.Resolve(_fontKey);
         _updatingFont = false;
-        FontLicenseText.Text = string.Join("\n\n", new[] { "Outfit", "SpaceGrotesk", "Sora" }.Select(name => {
-            using var stream = AssetLoader.Open(new Uri("avares://LootDrop/Assets/Fonts/" + name + "-OFL.txt"));
-            using var reader = new StreamReader(stream); return name + "\n" + reader.ReadToEnd(); }));
+        FontLicenseText.Text = string.Join("\n\n", FontCatalog.Choices.Where(c => c.LicenseStem != null).Select(choice => {
+            using var stream = AssetLoader.Open(new Uri("avares://LootDrop/Assets/Fonts/" + choice.LicenseStem + "-OFL.txt"));
+            using var reader = new StreamReader(stream); return choice.Name + "\n" + reader.ReadToEnd(); }));
+        FontAvailabilityText.Text = $"{FontCatalog.Choices.Count} built-in typefaces. Changes apply instantly and stay on this computer.";
         ApplyAppFont();
         SelectSettingsCategory("general");
     }

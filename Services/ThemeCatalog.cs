@@ -35,6 +35,12 @@ public static class ThemeCatalog
         Add("Rosewater", "#A24D76", "pink", true, "#FDF0F6", "#F5DFEB", "#FFFCFE", "#FFF7FB", "#F8E9F1", "#412536", "#735368");
         Add("Cyber Lime", "#CAFF42", "green", false, "#10130C", "#171D10", "#1B2413", "#253018", "#11190C", "#F3FFE4", "#BACDA6");
         Add("Neon Arcade", "#FF5CE1", "pink", false, "#110D20", "#1C1431", "#271B40", "#30204D", "#181024", "#FFF0FF", "#CDB7E9");
+        Add("Midnight Slate", "#91B4F8", "blue", false, "#10141D", "#171D29", "#1F2836", "#273345", "#141C28", "#F0F4FC", "#BAC7DA");
+        Add("Amber Terminal", "#FFC46B", "gold", false, "#17130F", "#211A13", "#2B2218", "#362B1E", "#1D1811", "#FFF5E5", "#D9C6A9");
+        Add("Deep Ocean", "#50DFD1", "cyan", false, "#08171D", "#0D222A", "#12303A", "#193E49", "#0C222A", "#E9FAFF", "#AECBD4");
+        Add("Paper Ink", "#42617F", "blue", true, "#F4F1EA", "#E8E3D9", "#FFFEFA", "#FAF8F1", "#EAE6DD", "#242B35", "#59616C");
+        Add("Periwinkle Dawn", "#4F5CB3", "purple", true, "#EDF1FE", "#DFE6F9", "#FBFCFF", "#F5F7FF", "#E5EAF9", "#26304D", "#526183");
+        Add("Neon Voltage", "#E6FF57", "green", false, "#0B1113", "#111D20", "#17292D", "#1E343A", "#0E2025", "#F0FDFF", "#B4D3D9");
         return new ReadOnlyDictionary<string, ThemePalette>(items);
 
         void Add(string name, string hex, string icon, bool light, string bg, string side, string panel, string card, string input, string text, string muted)

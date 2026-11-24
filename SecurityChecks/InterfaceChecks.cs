@@ -22,7 +22,7 @@ internal static class InterfaceChecks
         void Settle(){Dispatcher.UIThread.RunJobs();AvaloniaHeadlessPlatform.ForceRenderTimerTick();}
         void Save(string name){if(!screenshots)return;using var frame=window.CaptureRenderedFrame();frame!.Save(Path.Combine(output,name+".png"),new Avalonia.Media.Imaging.PngBitmapEncoderOptions());}
         var chooser=window.FindControl<ComboBox>("FontChoiceBox")!;
-        check(FontCatalog.Choices.Count==4 && FontCatalog.Resolve("unknown").Key=="outfit","Four bundled font choices and a safe default are available");
+        check(FontCatalog.Choices.Count==9 && FontCatalog.Resolve("unknown").Key=="outfit","Nine bundled font choices and a safe default are available");
         foreach(var choice in FontCatalog.Choices)
         {
             foreach(var weight in new[]{FontWeight.Normal,FontWeight.SemiBold})

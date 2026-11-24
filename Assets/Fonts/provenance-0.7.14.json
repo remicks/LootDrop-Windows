@@ -1,0 +1,57 @@
+[
+  {
+    "Revision": "06bfe0d62a98375cb09c942fa18e68bd32cff057",
+    "Weights": [
+      "Regular",
+      "SemiBold"
+    ],
+    "Repo": "google/fonts",
+    "License": "ofl/lato/OFL.txt",
+    "Path": "ofl/lato",
+    "Name": "Lato"
+  },
+  {
+    "Revision": "555facfb2a18c72c3c0380f0d9c0f060453a9058",
+    "Weights": [
+      "Regular",
+      "SemiBold"
+    ],
+    "Repo": "JulietaUla/Montserrat",
+    "License": "OFL.txt",
+    "Path": "fonts/ttf",
+    "Name": "Montserrat"
+  },
+  {
+    "Revision": "87b37a2daaed80fcb8e8ccb0085c4d72ddade12e",
+    "Weights": [
+      "Regular",
+      "Semibold"
+    ],
+    "Repo": "adobe-fonts/source-sans",
+    "License": "LICENSE.md",
+    "Path": "TTF",
+    "Name": "SourceSans3"
+  },
+  {
+    "Revision": "2e90fe366fdc27c12682db13e5aa20ded3d90908",
+    "Weights": [
+      "Regular",
+      "SemiBold"
+    ],
+    "Repo": "IBM/plex",
+    "License": "packages/plex-sans/LICENSE.txt",
+    "Path": "packages/plex-sans/fonts/complete/ttf",
+    "Name": "IBMPlexSans"
+  },
+  {
+    "Revision": "06bfe0d62a98375cb09c942fa18e68bd32cff057",
+    "Weights": [
+      "Regular",
+      "Bold"
+    ],
+    "Repo": "google/fonts",
+    "License": "ofl/atkinsonhyperlegible/OFL.txt",
+    "Path": "ofl/atkinsonhyperlegible",
+    "Name": "AtkinsonHyperlegible"
+  }
+]
