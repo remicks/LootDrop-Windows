@@ -50,12 +50,59 @@ export async function waitForReady(load, { now = Date.now, sleep = delay, log = 
   }
   throw new SafeError('Uploads did not finish within ten minutes. No Discord message was sent. Finish uploading, then rerun manually.');
 }
+// Keep announcements compact without a network summarizer or another dependency.
+// Authors can supply a dedicated "Discord summary" section; older notes use feature headings/bullets.
+const SUMMARY_ITEMS = 3;
+const SUMMARY_ITEM_LENGTH = 110;
+function summaryText(value) {
+  const text = value.replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*_\x60~]/g, '')
+    .replace(/\s+/g, ' ').trim();
+  if (text.length <= SUMMARY_ITEM_LENGTH) return text;
+  const shortened = text.slice(0, SUMMARY_ITEM_LENGTH - 1).replace(/[\uD800-\uDBFF]$/, '');
+  const boundary = shortened.lastIndexOf(' ');
+  return shortened.slice(0, boundary >= SUMMARY_ITEM_LENGTH / 2 ? boundary : undefined).trimEnd() + '…';
+}
+export function summarizeNotes(body) {
+  const sections = [{ title: '', lines: [] }];
+  let fence;
+  for (const line of (typeof body === 'string' ? body : '').slice(0, 20_000).replace(/\r/g, '').split('\n')) {
+    const delimiter = line.match(/^\s*(\x60{3,}|~{3,})/);
+    if (delimiter) { if (!fence) fence = delimiter[1][0]; else if (fence === delimiter[1][0]) fence = undefined; continue; }
+    if (fence) continue;
+    const heading = line.match(/^\s{0,3}#{1,6}\s+(.+?)\s*#*\s*$/);
+    if (heading) sections.push({ title: summaryText(heading[1]), lines: [] });
+    else sections.at(-1).lines.push(line);
+  }
+  const dedicated = sections.find(s => /^(?:discord|announcement) summary$/i.test(s.title));
+  const highlights = [];
+  const append = text => {
+    const clean = summaryText(text);
+    if (clean && !highlights.includes(clean) && highlights.length < SUMMARY_ITEMS) highlights.push(clean);
+  };
+  for (const section of dedicated ? [dedicated] : sections) {
+    if (!dedicated && /^(?:validation|testing|tests|safety|security|downloads?|installation|checksums?|known issues|remaining coverage|release status|reproducing validation)\b/i.test(section.title)) continue;
+    const generic = !section.title || /^LootDrop\b/i.test(section.title) || /^(?:what.?s new|changelog|changes|highlights|features|improvements|fixes|bug fixes|release notes|overview|summary|added|updated|changed)$/i.test(section.title);
+    if (!dedicated && !generic) append(section.title);
+    else {
+      const bullets = section.lines.filter(line => /^\s*(?:[-*+] |\d+[.)] )/.test(line));
+      if (bullets.length) for (const line of bullets) append(line.replace(/^\s*(?:[-*+] |\d+[.)] )(?:\[[ xX]\]\s*)?/, ''));
+      else for (const paragraph of section.lines.join('\n').split(/\n\s*\n/)) {
+        const text = paragraph.replace(/\s+/g, ' ').trim();
+        if (text && !/^!\[|^<\!--|^\|/.test(text)) append(text.match(/^.*?[.!?](?:\s|$)/)?.[0] || text);
+      }
+    }
+    if (highlights.length === SUMMARY_ITEMS) break;
+  }
+  return highlights.length ? highlights.map(text => '• ' + text).join('\n') : 'See the release notes for changes.';
+}
+
 export function buildPayload(release) {
   if (!readiness(release).ready) throw new SafeError('Cannot announce an incomplete release.');
   const version = release.tag_name.replace(/^v/, '');
   const asset = suffix => release.assets.find(a => a.name === `LootDrop-v2-${version}-${suffix}`).browser_download_url;
   const kind = release.prerelease ? 'Tester prerelease' : 'Public release';
-  const notes = typeof release.body === 'string' ? release.body.replace(/\r/g, '').trim() : '';
+  const notes = summarizeNotes(release.body);
   const link = `\n\n[Full release notes and all downloads](${release.html_url})`;
   return {
     username: 'Degenerates Inc. · LootDrop',
@@ -64,7 +111,7 @@ export function buildPayload(release) {
     embeds: [{
       title: String(release.name || `LootDrop ${release.tag_name}`).slice(0, 256),
       url: release.html_url, color: 0xA448F4,
-      description: `**${kind} · Windows**\n\n${notes}`.slice(0, 3000 - link.length) + link,
+      description: `**${kind} · Windows**\n\n${notes}` + link,
       fields: [{ name: 'Windows installer', value: `[Download installer](${asset('Setup.exe')})`, inline: true },
         { name: 'Portable ZIP', value: `[Download portable ZIP](${asset('Portable-win-x64.zip')})`, inline: true }],
       footer: { text: 'Degenerates Inc. · Bad Decisions. Good Games.' },

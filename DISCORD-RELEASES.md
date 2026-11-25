@@ -15,7 +15,7 @@ Every build published as a GitHub Release must be announced in Discord, includin
 
 Stable and prerelease events are both covered by `release: published`. Editing release notes or adding files later does not automatically reannounce a release, so finish uploading before publication. If a future automated publisher uses GitHub's built-in GITHUB_TOKEN, its release event might not trigger another workflow; explicitly dispatch this notification workflow after upload completion in that publishing process.
 
-The message contains a branded release title, notes, installer/portable links and a full-release link. There is no top-level message content. Discord `allowed_mentions` explicitly disables everyone, role and user mentions, including when release notes contain mention syntax.
+The message contains a branded release title, a short changelog summary, installer/portable links and a full-release link. The summary contains at most three highlights, each capped at 110 characters; the full changelog stays on GitHub. An optional `## Discord summary` (or `## Announcement summary`) section can provide curated bullet points. Without that section, feature headings or the first feature bullets are used, while validation/download sections and fenced code blocks are skipped. Long highlights are shortened at word boundaries. Empty notes get a short fallback. No external summarization service or new dependency is used. There is no top-level message content. Discord `allowed_mentions` explicitly disables everyone, role and user mentions, including when release notes contain mention syntax.
 
 ## Manual validation or recovery
 
@@ -35,4 +35,4 @@ The workflow itself cannot predict assets that a publisher decides to add after 
 node --test .github/scripts/announce-release.test.mjs
 ```
 
-17 offline tests cover public/prerelease readiness, missing/unfinished/duplicate/foreign assets, version-tag injection, quiet-period timing/reset, timeout, explicit mention suppression, embed length limits, webhook-domain restrictions, redirect/auth-header handling, secret-safe failures, bounded rate-limit retries and Discord delivery checks. No real Discord call is made by these tests.
+26 offline tests cover public/prerelease readiness, missing/unfinished/duplicate/foreign assets, version-tag injection, quiet-period timing/reset, timeout, explicit mention suppression, embed length limits, webhook-domain restrictions, redirect/auth-header handling, secret-safe failures, bounded rate-limit retries and Discord delivery checks. Summary checks additionally cover curated sections, feature extraction, Markdown/code handling, empty notes, size limits, bounded input and Unicode-safe shortening. No real Discord call is made by these tests.

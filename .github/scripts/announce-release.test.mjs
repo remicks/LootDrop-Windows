@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildPayload, readiness, requiredNames, waitForReady, webhookEndpoint, sendDiscord, SafeError } from './announce-release.mjs';
+import { buildPayload, summarizeNotes, readiness, requiredNames, waitForReady, webhookEndpoint, sendDiscord, SafeError } from './announce-release.mjs';
 const WEBHOOK = 'https://discord.com/api/webhooks/123456789/test-placeholder-token';
 const fixture = () => ({ id: 42, tag_name: 'v0.7.11', name: 'LootDrop v0.7.11', draft: false, prerelease: true,
   published_at: '2026-11-22T04:29:00Z', updated_at: '2026-11-22T04:29:00Z', body: 'Notes @everyone @here <@&123> <@456>',
@@ -52,7 +52,7 @@ test('payload explicitly disables everyone, user and role mentions and has no co
 });
 test('oversized public release notes/title are constrained to Discord limits', () => {
   const r = fixture(); r.name = 'x'.repeat(1000); r.body = 'y'.repeat(100000); r.prerelease = false;
-  const p = buildPayload(r); assert.equal(p.embeds[0].title.length, 256); assert.ok(p.embeds[0].description.length <= 3000); assert.match(p.embeds[0].description, /Full release notes/);
+  const p = buildPayload(r); assert.equal(p.embeds[0].title.length, 256); assert.ok(p.embeds[0].description.length <= 600); assert.match(p.embeds[0].description, /Full release notes/);
 });
 test('incomplete release cannot bypass readiness at payload construction', () => assert.throws(() => buildPayload({ ...fixture(), draft: true }), SafeError));
 test('webhook accepts only official HTTPS endpoints and safe thread options', () => {
@@ -89,4 +89,60 @@ test('only rejected rate-limited requests retry, with a bounded delay', async ()
 });
 test('unexpected mention details are treated as a delivery verification error', async () => {
   await assert.rejects(sendDiscord(WEBHOOK, buildPayload(fixture()), { fetcher: async () => Response.json({ id: '123', mention_everyone: true }) }), /unexpected delivery\/mention/);
+});
+
+
+test('feature headings summarize a release without its validation and download prose', () => {
+  const notes = '## Six new themes\n\nMidnight Slate and more palettes.\n\n## Five new embedded fonts\n\nFive font families and full licenses.\n\n## Validation and safety\n\n723 assertions and a very long report.\n\n## Downloads\n\nAll artifacts are attached.';
+  assert.equal(summarizeNotes(notes), '• Six new themes\n• Five new embedded fonts');
+  const description = buildPayload({ ...fixture(), body: notes }).embeds[0].description;
+  assert.ok(description.length < 250); assert.ok(!description.includes('723 assertions'));
+  assert.match(description, /Full release notes and all downloads/);
+});
+
+test('a grouped changelog shows at most three short feature bullets', () => {
+  assert.equal(summarizeNotes('## What’s new\n- Aligned cards.\n- Embedded fonts.\n- Categorized Settings.\n- Rounded switches.'),
+    '• Aligned cards.\n• Embedded fonts.\n• Categorized Settings.');
+});
+
+test('a dedicated Discord summary takes priority over the full changelog', () => {
+  const notes = '## Features\n- Full detail one\n- Full detail two\n- Full detail three\n\n## Discord summary\n- Cleaner layouts\n- More themes\n\n## Validation\nMany checks.';
+  assert.equal(summarizeNotes(notes), '• Cleaner layouts\n• More themes');
+  assert.equal(summarizeNotes('## Announcement summary\nShort curated update. More detail is elsewhere.'), '• Short curated update.');
+});
+
+test('markdown is flattened and fenced commands do not become highlights', () => {
+  const notes = '## Highlights\n~~~sh\n- private build command\n~~~\n- **Faster** [search](https://example.org).\n- [x] Cleaner _cards_.';
+  assert.equal(summarizeNotes(notes), '• Faster search.\n• Cleaner cards.');
+});
+
+test('plain paragraphs use short first sentences and empty notes have a fallback', () => {
+  assert.equal(summarizeNotes('More font choices. Extra explanation stays on GitHub.\n\nClearer Settings. Long explanation.'), '• More font choices.\n• Clearer Settings.');
+  for (const notes of [null, undefined, '', '## Validation\nOnly a report.', '## Discord summary\n'])
+    assert.equal(summarizeNotes(notes), 'See the release notes for changes.');
+});
+
+test('long highlights are word-trimmed and the complete embed stays compact', () => {
+  const notes = '## Highlights\n' + ['First','Second','Third','Fourth'].map(word => '- ' + word + ' useful words'.repeat(100)).join('\n');
+  const summary = summarizeNotes(notes); assert.equal(summary.split('\n').length, 3);
+  for (const line of summary.split('\n')) { assert.ok(line.length <= 112); assert.ok(line.endsWith('…')); assert.ok(!line.endsWith('usefu…')); }
+  const payload = buildPayload({ ...fixture(), body: notes });
+  assert.ok(payload.embeds[0].description.length <= 600);
+  assert.equal(payload.embeds[0].fields.length, 2);
+  assert.deepEqual(payload.allowed_mentions, { parse: [], users: [], roles: [], replied_user: false });
+});
+
+test('summary work is bounded even when a release body is enormous', () => {
+  assert.equal(summarizeNotes('## Highlights\n- Quick update\n~~~\n' + 'detail\n'.repeat(100000)), '• Quick update');
+});
+
+
+test('trimming unbroken emoji does not split a Unicode character', () => {
+  const summary = summarizeNotes('## Highlights\n- ' + '😀'.repeat(100));
+  assert.ok(summary.length <= 112); assert.ok(summary.endsWith('…'));
+  assert.ok([...summary].every(character => !/[\uD800-\uDFFF]/.test(character) || character.length === 2));
+});
+
+test('a repeated release title does not crowd out the feature summary', () => {
+  assert.equal(summarizeNotes('# LootDrop Windows v2 0.7.14\n\n## New themes\nMore detailed text.\n\n## New fonts\nMore detailed text.'), '• New themes\n• New fonts');
 });
