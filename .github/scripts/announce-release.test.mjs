@@ -48,11 +48,11 @@ test('missing uploads time out without an announcement', async () => {
 test('payload explicitly disables everyone, user and role mentions and has no content', () => {
   const payload = buildPayload(fixture()); assert.deepEqual(payload.allowed_mentions, { parse: [], users: [], roles: [], replied_user: false });
   assert.equal('content' in payload, false); assert.match(payload.embeds[0].description, /@everyone/);
-  assert.match(payload.embeds[0].description, /Tester prerelease/); assert.match(payload.embeds[0].fields[0].value, /LootDrop-v2-0.7.11-Setup.exe/);
+  assert.match(payload.embeds[0].description, /Preview release/); assert.match(payload.embeds[0].description, /LootDrop-v2-0.7.11-Setup.exe/);
 });
 test('oversized public release notes/title are constrained to Discord limits', () => {
   const r = fixture(); r.name = 'x'.repeat(1000); r.body = 'y'.repeat(100000); r.prerelease = false;
-  const p = buildPayload(r); assert.equal(p.embeds[0].title.length, 256); assert.ok(p.embeds[0].description.length <= 600); assert.match(p.embeds[0].description, /Full release notes/);
+  const p = buildPayload(r); assert.equal(p.embeds[0].title.length, 256); assert.ok(p.embeds[0].description.length <= 1600); assert.match(p.embeds[0].description, /Full release notes/);
 });
 test('incomplete release cannot bypass readiness at payload construction', () => assert.throws(() => buildPayload({ ...fixture(), draft: true }), SafeError));
 test('webhook accepts only official HTTPS endpoints and safe thread options', () => {
@@ -96,7 +96,7 @@ test('feature headings summarize a release without its validation and download p
   const notes = '## Six new themes\n\nMidnight Slate and more palettes.\n\n## Five new embedded fonts\n\nFive font families and full licenses.\n\n## Validation and safety\n\n723 assertions and a very long report.\n\n## Downloads\n\nAll artifacts are attached.';
   assert.equal(summarizeNotes(notes), '• Six new themes\n• Five new embedded fonts');
   const description = buildPayload({ ...fixture(), body: notes }).embeds[0].description;
-  assert.ok(description.length < 250); assert.ok(!description.includes('723 assertions'));
+  assert.ok(description.length < 1100); assert.ok(!description.includes('723 assertions'));
   assert.match(description, /Full release notes and all downloads/);
 });
 
@@ -127,8 +127,8 @@ test('long highlights are word-trimmed and the complete embed stays compact', ()
   const summary = summarizeNotes(notes); assert.equal(summary.split('\n').length, 3);
   for (const line of summary.split('\n')) { assert.ok(line.length <= 112); assert.ok(line.endsWith('…')); assert.ok(!line.endsWith('usefu…')); }
   const payload = buildPayload({ ...fixture(), body: notes });
-  assert.ok(payload.embeds[0].description.length <= 600);
-  assert.equal(payload.embeds[0].fields.length, 2);
+  assert.ok(payload.embeds[0].description.length <= 1600);
+  assert.equal('fields' in payload.embeds[0], false);
   assert.deepEqual(payload.allowed_mentions, { parse: [], users: [], roles: [], replied_user: false });
 });
 
@@ -145,4 +145,26 @@ test('trimming unbroken emoji does not split a Unicode character', () => {
 
 test('a repeated release title does not crowd out the feature summary', () => {
   assert.equal(summarizeNotes('# LootDrop Windows v2 0.7.14\n\n## New themes\nMore detailed text.\n\n## New fonts\nMore detailed text.'), '• New themes\n• New fonts');
+});
+
+
+test('RMPCS layout uses one link-first embed with matching accent, short highlights and branded footer', () => {
+  const release = { ...fixture(), body: '## Highlights\n- Cleaner layouts\n- More fonts\n- More themes\n- Fourth detail' };
+  const payload = buildPayload(release);
+  assert.equal(payload.username, 'LootDrop Releases');
+  assert.equal(payload.embeds.length, 1);
+  const embed = payload.embeds[0];
+  assert.equal(embed.color, 12462926);
+  assert.equal(embed.url, release.html_url);
+  assert.equal(embed.footer.text, 'LootDrop · Your Free Game Radar');
+  assert.equal(embed.timestamp, new Date(release.published_at).toISOString());
+  assert.equal('fields' in embed, false);
+  const download = 'https://github.com/remicks/LootDrop-Windows/releases/download/v0.7.11/LootDrop-v2-0.7.11-';
+  assert.equal(embed.description,
+    '**Preview release**\n\n' +
+    '[Install LootDrop](' + download + 'Setup.exe) | [Portable ZIP](' + download + 'Portable-win-x64.zip)\n' +
+    '[Release report](' + download + 'Release-Report.md) | [Checksums](' + download + 'SHA256SUMS.txt)\n\n' +
+    '• Cleaner layouts\n• More fonts\n• More themes\n\n' +
+    '[Full release notes and all downloads](' + release.html_url + ')');
+  assert.match(buildPayload({ ...release, prerelease: false }).embeds[0].description, /^\*\*New release\*\*/);
 });

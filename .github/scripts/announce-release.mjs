@@ -101,20 +101,20 @@ export function buildPayload(release) {
   if (!readiness(release).ready) throw new SafeError('Cannot announce an incomplete release.');
   const version = release.tag_name.replace(/^v/, '');
   const asset = suffix => release.assets.find(a => a.name === `LootDrop-v2-${version}-${suffix}`).browser_download_url;
-  const kind = release.prerelease ? 'Tester prerelease' : 'Public release';
+  const kind = release.prerelease ? 'Preview release' : 'New release';
   const notes = summarizeNotes(release.body);
   const link = `\n\n[Full release notes and all downloads](${release.html_url})`;
   return {
-    username: 'Degenerates Inc. · LootDrop',
+    username: 'LootDrop Releases',
     avatar_url: `https://raw.githubusercontent.com/${REPOSITORY}/main/Assets/Branding/degenerates-inc-duo.png`,
     allowed_mentions: { parse: [], users: [], roles: [], replied_user: false },
     embeds: [{
       title: String(release.name || `LootDrop ${release.tag_name}`).slice(0, 256),
-      url: release.html_url, color: 0xA448F4,
-      description: `**${kind} · Windows**\n\n${notes}` + link,
-      fields: [{ name: 'Windows installer', value: `[Download installer](${asset('Setup.exe')})`, inline: true },
-        { name: 'Portable ZIP', value: `[Download portable ZIP](${asset('Portable-win-x64.zip')})`, inline: true }],
-      footer: { text: 'Degenerates Inc. · Bad Decisions. Good Games.' },
+      // Match the RMPCS announcement accent and single-column link-first layout.
+      url: release.html_url, color: 0xBE2B4E,
+      description: `**${kind}**\n\n[Install LootDrop](${asset('Setup.exe')}) | [Portable ZIP](${asset('Portable-win-x64.zip')})\n` +
+        `[Release report](${asset('Release-Report.md')}) | [Checksums](${asset('SHA256SUMS.txt')})\n\n${notes}` + link,
+      footer: { text: 'LootDrop · Your Free Game Radar' },
       timestamp: new Date(release.published_at).toISOString()
     }]
   };
