@@ -3,8 +3,10 @@
 #endif
 ; LootDrop Windows x64 per-user installer — Inno Setup 6
 ; Compile with Build-Tester-Releases.ps1 or open this file in Inno Setup.
+#ifndef MyAppVersion
+  #error Build-Tester-Releases.ps1 supplies MyAppVersion from LootDrop.csproj.
+#endif
 #define MyAppName "LootDrop"
-#define MyAppVersion "0.7.14"
 #define MyAppExeName "LootDrop.exe"
 
 [Setup]
@@ -17,7 +19,8 @@ DefaultDirName={localappdata}\Programs\LootDrop
 DefaultGroupName=LootDrop
 DisableProgramGroupPage=yes
 OutputDir=dist
-OutputBaseFilename=LootDrop-Setup
+; Must match the asset name the in-app updater and Discord announcement accept.
+OutputBaseFilename=LootDrop-v2-{#MyAppVersion}-Setup
 SetupIconFile=Assets\lootdrop-purple.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 Compression=lzma2

@@ -1,0 +1,63 @@
+PASS NATIVE Dock registration succeeds on Display 1 · 1920 × 1080
+PASS NATIVE Windows reserves the right strip on Display 1 · 1920 × 1080
+PASS NATIVE Other display work area stays unchanged
+PASS NATIVE Other display work area stays unchanged
+PASS NATIVE Repeated position notifications do not accumulate reservations
+PASS NATIVE Fullscreen-start notification yields the sidebar z-order
+PASS NATIVE Fullscreen-end notification restores sidebar z-order
+PASS NATIVE Simulated shell restart re-registers without leaking or growing reserved space
+PASS NATIVE Native sidebar occupies the approved reserved strip
+PASS NATIVE A real maximized window respects the sidebar reservation
+PASS NATIVE Changing to the left edge releases the old edge
+PASS NATIVE Hiding releases all reserved desktop space
+PASS NATIVE Tray restoration reserves space again
+PASS NATIVE Minimizing releases reserved space
+PASS NATIVE Disabling docking restores the original work area
+PASS NATIVE Disabling restores normal window behavior
+PASS NATIVE Dock registration succeeds on Display 2 · 1920 × 1080
+PASS NATIVE Windows reserves the right strip on Display 2 · 1920 × 1080
+PASS NATIVE Other display work area stays unchanged
+PASS NATIVE Other display work area stays unchanged
+PASS NATIVE Repeated position notifications do not accumulate reservations
+PASS NATIVE Fullscreen-start notification yields the sidebar z-order
+PASS NATIVE Fullscreen-end notification restores sidebar z-order
+PASS NATIVE Simulated shell restart re-registers without leaking or growing reserved space
+PASS NATIVE Native sidebar occupies the approved reserved strip
+PASS NATIVE A real maximized window respects the sidebar reservation
+PASS NATIVE Changing to the left edge releases the old edge
+PASS NATIVE Hiding releases all reserved desktop space
+PASS NATIVE Tray restoration reserves space again
+PASS NATIVE Minimizing releases reserved space
+PASS NATIVE Disabling docking restores the original work area
+PASS NATIVE Disabling restores normal window behavior
+PASS NATIVE Dock registration succeeds on Display 3 (primary) · 1920 × 1080
+PASS NATIVE Windows reserves the right strip on Display 3 (primary) · 1920 × 1080
+PASS NATIVE Other display work area stays unchanged
+PASS NATIVE Other display work area stays unchanged
+PASS NATIVE Repeated position notifications do not accumulate reservations
+PASS NATIVE Fullscreen-start notification yields the sidebar z-order
+PASS NATIVE Fullscreen-end notification restores sidebar z-order
+PASS NATIVE Simulated shell restart re-registers without leaking or growing reserved space
+PASS NATIVE Native sidebar occupies the approved reserved strip
+PASS NATIVE A real maximized window respects the sidebar reservation
+PASS NATIVE Changing to the left edge releases the old edge
+PASS NATIVE Hiding releases all reserved desktop space
+PASS NATIVE Tray restoration reserves space again
+PASS NATIVE Minimizing releases reserved space
+PASS NATIVE Disabling docking restores the original work area
+PASS NATIVE Disabling restores normal window behavior
+PASS NATIVE Missing selected display falls back to the primary display
+PASS NATIVE Invalid geometry disables docking and restores a usable normal window
+PASS NATIVE Failure path releases reserved work area
+PASS NATIVE Failure path releases reserved work area
+PASS NATIVE Failure path releases reserved work area
+PASS NATIVE Hidden-startup fixture hides rather than remaining docked
+PASS NATIVE Hidden startup leaves the work area unchanged
+PASS NATIVE Hidden startup leaves the work area unchanged
+PASS NATIVE Hidden startup leaves the work area unchanged
+PASS NATIVE Restoring saved-enabled hidden startup acquires a reservation
+PASS NATIVE Closing test starts with an active reservation
+PASS NATIVE Final close restores Display 1 · 1920 × 1080
+PASS NATIVE Final close restores Display 2 · 1920 × 1080
+PASS NATIVE Final close restores Display 3 (primary) · 1920 × 1080
+Completed 62 native desktop docking checks. Original work areas restored; real user data untouched.

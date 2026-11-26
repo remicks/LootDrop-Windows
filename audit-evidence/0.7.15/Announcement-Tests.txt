@@ -1,0 +1,35 @@
+✔ published prereleases and public releases are both eligible (5.3099ms)
+✔ drafts, missing packages, zero-size uploads and absent digests are not announced (0.1109ms)
+✔ unfinished optional assets also prevent announcing (0.0654ms)
+✔ duplicate asset names and foreign release/download URLs are rejected (0.2293ms)
+✔ unsafe tags cannot inject paths or unexpected package names (0.0773ms)
+✔ waits for a full quiet period, not just an uploaded first response (0.7657ms)
+✔ a new optional asset resets the quiet period (0.19ms)
+✔ missing uploads time out without an announcement (0.2097ms)
+✔ payload explicitly disables everyone, user and role mentions and has no content (1.289ms)
+✔ oversized public release notes/title are constrained to Discord limits (0.3073ms)
+✔ incomplete release cannot bypass readiness at payload construction (0.075ms)
+✔ webhook accepts only official HTTPS endpoints and safe thread options (0.2658ms)
+✔ Discord POST blocks redirects, omits GitHub authorization, and receives mention suppression (10.5841ms)
+✔ ambiguous network failure is not retried and cannot reveal the webhook (0.1963ms)
+✔ HTTP errors cannot print Discord response contents or webhook token (0.2647ms)
+✔ only rejected rate-limited requests retry, with a bounded delay (0.4723ms)
+✔ unexpected mention details are treated as a delivery verification error (0.2075ms)
+✔ feature headings summarize a release without its validation and download prose (0.1895ms)
+✔ a grouped changelog shows at most three short feature bullets (0.3778ms)
+✔ a dedicated Discord summary takes priority over the full changelog (0.089ms)
+✔ markdown is flattened and fenced commands do not become highlights (0.0363ms)
+✔ plain paragraphs use short first sentences and empty notes have a fallback (0.063ms)
+✔ long highlights are word-trimmed and the complete embed stays compact (0.2011ms)
+✔ summary work is bounded even when a release body is enormous (0.6206ms)
+✔ trimming unbroken emoji does not split a Unicode character (0.1069ms)
+✔ a repeated release title does not crowd out the feature summary (0.0335ms)
+✔ RMPCS layout uses one link-first embed with matching accent, short highlights and branded footer (0.3045ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 66.6337

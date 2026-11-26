@@ -2,7 +2,7 @@
 
 A Windows desktop app by **Degenerates Inc.** for discovering free-game offers and tracking a local wishlist and claimed collection.
 
-Current version: **0.7.14 — expanded themes and fonts tester prerelease**. Download published builds from [Releases](https://github.com/remicks/LootDrop-Windows/releases). See [release notes](RELEASE-0.7.14.md), [Help](HELP.md), and the [theme/font security review](SECURITY-THEMES-FONTS-0.7.14.md).
+Current version: **0.7.15 — release packaging fix tester prerelease**. Download published builds from [Releases](https://github.com/remicks/LootDrop-Windows/releases). See [release notes](RELEASE-0.7.15.md), [Help](HELP.md), and the [theme/font security review](SECURITY-THEMES-FONTS-0.7.14.md).
 
 ## Features
 
